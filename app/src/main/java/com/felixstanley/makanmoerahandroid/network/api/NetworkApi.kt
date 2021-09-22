@@ -1,9 +1,7 @@
 package com.felixstanley.makanmoerahandroid.network.api
 
 import com.felixstanley.makanmoerahandroid.network.Configuration.retrofit
-import com.felixstanley.makanmoerahandroid.network.service.JumbotronImageService
-import com.felixstanley.makanmoerahandroid.network.service.LocationService
-import com.felixstanley.makanmoerahandroid.network.service.RestaurantService
+import com.felixstanley.makanmoerahandroid.network.service.*
 
 object NetworkApi {
 
@@ -17,5 +15,13 @@ object NetworkApi {
 
     val locationService: LocationService by lazy {
         retrofit.create(LocationService::class.java)
+    }
+
+    val facilityService: FacilityService by lazy {
+        retrofit.create(FacilityService::class.java)
+    }
+
+    val userService: UserService by lazy {
+        retrofit.create(UserService::class.java)
     }
 }
