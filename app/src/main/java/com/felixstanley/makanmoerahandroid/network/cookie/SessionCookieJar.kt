@@ -11,18 +11,13 @@ class SessionCookieJar : CookieJar {
     private var cookies: MutableList<Cookie> = mutableListOf<Cookie>()
 
     override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
-        // Set All Cookies if we are getting response from Login API
-        if (url.encodedPath().equals(LOGIN_API_URL)) {
-            this.cookies = cookies
-        }
+        // Always save All Cookies
+        this.cookies = cookies
     }
 
     override fun loadForRequest(url: HttpUrl): MutableList<Cookie> {
-        // Always forward 'saved' cookies whenever we are calling non Login API
-        if (!url.encodedPath().equals(LOGIN_API_URL) && !cookies.isNullOrEmpty()) {
-            return cookies
-        }
-        return mutableListOf<Cookie>()
+        // Always forward 'saved' cookies
+        return cookies
     }
 
 }
