@@ -9,7 +9,7 @@ object Configuration {
 
     private const val BASE_URL = "https://makanmoerah.com/api/"
     private val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
+        .addLast(KotlinJsonAdapterFactory())
         .build()
 
     val retrofit = Retrofit.Builder()
