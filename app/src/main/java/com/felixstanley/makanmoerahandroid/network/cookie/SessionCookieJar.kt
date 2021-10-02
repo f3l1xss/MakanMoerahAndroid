@@ -4,11 +4,10 @@ import okhttp3.Cookie
 import okhttp3.CookieJar
 import okhttp3.HttpUrl
 
-private const val LOGIN_API_URL = "/api/user/login"
 
-class SessionCookieJar : CookieJar {
+object SessionCookieJar : CookieJar {
 
-    private var cookies: MutableList<Cookie> = mutableListOf<Cookie>()
+    var cookies: MutableList<Cookie> = mutableListOf<Cookie>()
 
     override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
         // Always save All Cookies
