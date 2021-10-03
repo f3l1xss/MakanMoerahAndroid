@@ -54,4 +54,7 @@ dependencies {
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutine"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutine"
+
+    // SafetyNet API (Recaptcha)
+    implementation "com.google.android.gms:play-services-safetynet:$version_safety_net"
 }

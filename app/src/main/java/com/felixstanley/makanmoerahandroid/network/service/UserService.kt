@@ -14,12 +14,14 @@ interface UserService {
     suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String,
-        @Field("recaptchaToken") recaptchaToken: String
+        @Field("recaptchaToken") recaptchaToken: String,
+        @Field("isFromAndroid") isFromAndroid: Boolean = true
     )
 
     @POST("$BASE_URL/forgotPassword")
     suspend fun forgotPassword(
         @Query("forgotPasswordEmail") forgotPasswordEmail: String,
-        @Query("recaptchaToken") recaptchaToken: String
+        @Query("recaptchaToken") recaptchaToken: String,
+        @Query("isFromAndroid") isFromAndroid: Boolean = true
     )
 }
