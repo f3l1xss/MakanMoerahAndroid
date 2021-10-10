@@ -22,5 +22,12 @@ data class Restaurant(
     val foodCategory: String,
     val priceCategory: Short,
     val averageStar: Double,
-    val description: String
+    val description: String,
+
+    // Create Restaurant Variables
+    val usersId: Int,
+    val cityId: Int,
+    val capacities: List<RestaurantCapacity>,
+    val minimumSpends: List<List<RestaurantMinimumSpend>>,
+    val mergedCapacities: List<List<RestaurantCapacity>>
 )

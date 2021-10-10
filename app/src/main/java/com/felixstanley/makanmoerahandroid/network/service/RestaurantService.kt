@@ -1,9 +1,11 @@
 package com.felixstanley.makanmoerahandroid.network.service
 
 import com.felixstanley.makanmoerahandroid.entity.EntitiesPage
+import com.felixstanley.makanmoerahandroid.entity.enums.RestaurantCriteria
 import com.felixstanley.makanmoerahandroid.entity.enums.RestaurantFilter
 import com.felixstanley.makanmoerahandroid.entity.enums.SortCriteria
 import com.felixstanley.makanmoerahandroid.entity.restaurant.Restaurant
+import com.felixstanley.makanmoerahandroid.entity.restaurant.RestaurantCriteriaWithValue
 import retrofit2.http.GET
 import retrofit2.http.Query
 import java.time.LocalDate
@@ -45,6 +47,27 @@ interface RestaurantService {
         @Query("date") date: LocalDate,
         @Query("numOfPeople") numOfPeople: Int
     ): Restaurant
+
+    @GET("$BASE_URL/criteria")
+    suspend fun getCriteria(
+        @Query("currentLatitude") currentLatitude: Double,
+        @Query("currentLongitude") currentLongitude: Double,
+        @Query("date") date: LocalDate,
+        @Query("timeslot") timeslot: Short,
+        @Query("numOfPeople") numOfPeople: Short,
+    ): Set<RestaurantCriteriaWithValue>
+
+    @GET("$BASE_URL/getByCriteria")
+    suspend fun getByCriteria(
+        @Query("currentLatitude") currentLatitude: Double,
+        @Query("currentLongitude") currentLongitude: Double,
+        @Query("size") size: Int,
+        @Query("criteria") criteria: RestaurantCriteria,
+        @Query("criteriaValue") criteriaValue: String,
+        @Query("date") date: LocalDate,
+        @Query("timeslot") timeslot: Short,
+        @Query("numOfPeople") numOfPeople: Short
+    ): List<Restaurant>
 
     @GET("$BASE_URL/filter")
     suspend fun getRestaurantFilter(

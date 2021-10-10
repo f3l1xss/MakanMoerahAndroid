@@ -24,4 +24,20 @@ object NetworkApi {
     val userService: UserService by lazy {
         retrofit.create(UserService::class.java)
     }
+
+    val bookingService: BookingService by lazy {
+        retrofit.create(BookingService::class.java)
+    }
+
+    val createRestaurantService: CreateRestaurantService by lazy {
+        retrofit.create(CreateRestaurantService::class.java)
+    }
+
+    val paymentModeService: PaymentModeService by lazy {
+        retrofit.create(PaymentModeService::class.java)
+    }
+
+    val discountTemplateService: DiscountTemplateService by lazy {
+        retrofit.create(DiscountTemplateService::class.java)
+    }
 }
