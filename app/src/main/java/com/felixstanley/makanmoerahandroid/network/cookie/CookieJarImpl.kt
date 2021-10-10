@@ -5,7 +5,7 @@ import okhttp3.CookieJar
 import okhttp3.HttpUrl
 
 
-object SessionCookieJar : CookieJar {
+object CookieJarImpl : CookieJar {
 
     var cookies: MutableList<Cookie> = mutableListOf<Cookie>()
 

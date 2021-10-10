@@ -1,6 +1,6 @@
 package com.felixstanley.makanmoerahandroid.network
 
-import com.felixstanley.makanmoerahandroid.network.cookie.SessionCookieJar
+import com.felixstanley.makanmoerahandroid.network.cookie.CookieJarImpl
 import com.felixstanley.makanmoerahandroid.network.interceptor.AjaxHeaderInterceptor
 import com.felixstanley.makanmoerahandroid.network.interceptor.CsrfTokenHeaderInterceptor
 import com.felixstanley.makanmoerahandroid.network.interceptor.ReloginInterceptor
@@ -18,7 +18,7 @@ object Configuration {
         .addInterceptor(AjaxHeaderInterceptor())
         .addInterceptor(CsrfTokenHeaderInterceptor())
         .addInterceptor(ReloginInterceptor())
-        .cookieJar(SessionCookieJar).build()
+        .cookieJar(CookieJarImpl).build()
     private val moshi = Moshi.Builder()
         .addLast(KotlinJsonAdapterFactory())
         .build()

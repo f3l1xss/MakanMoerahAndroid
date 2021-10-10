@@ -1,6 +1,6 @@
 package com.felixstanley.makanmoerahandroid.network.interceptor
 
-import com.felixstanley.makanmoerahandroid.network.cookie.SessionCookieJar
+import com.felixstanley.makanmoerahandroid.network.cookie.CookieJarImpl
 import okhttp3.Cookie
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -22,7 +22,7 @@ class CsrfTokenHeaderInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         if (!allowedHttpMethods.contains(request.method())) {
-            val csrfCookieValue = getCsrfCookieValue(SessionCookieJar.cookies)
+            val csrfCookieValue = getCsrfCookieValue(CookieJarImpl.cookies)
             if (csrfCookieValue != null) {
                 request = request.newBuilder().addHeader(CSRF_HEADER_NAME, csrfCookieValue).build()
             }
