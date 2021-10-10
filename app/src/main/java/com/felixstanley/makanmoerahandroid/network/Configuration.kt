@@ -1,7 +1,9 @@
 package com.felixstanley.makanmoerahandroid.network
 
 import com.felixstanley.makanmoerahandroid.network.cookie.SessionCookieJar
+import com.felixstanley.makanmoerahandroid.network.interceptor.AjaxHeaderInterceptor
 import com.felixstanley.makanmoerahandroid.network.interceptor.CsrfTokenHeaderInterceptor
+import com.felixstanley.makanmoerahandroid.network.interceptor.ReloginInterceptor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -10,8 +12,12 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object Configuration {
 
-    private const val BASE_URL = "https://makanmoerah.com/api/"
-    private val okHttpClient = OkHttpClient.Builder().addInterceptor(CsrfTokenHeaderInterceptor())
+    /*private const val BASE_URL = "https://makanmoerah.com/api/"*/
+    private const val BASE_URL = "http://localhost:8080/api/"
+    private val okHttpClient = OkHttpClient.Builder()
+        .addInterceptor(AjaxHeaderInterceptor())
+        .addInterceptor(CsrfTokenHeaderInterceptor())
+        .addInterceptor(ReloginInterceptor())
         .cookieJar(SessionCookieJar).build()
     private val moshi = Moshi.Builder()
         .addLast(KotlinJsonAdapterFactory())

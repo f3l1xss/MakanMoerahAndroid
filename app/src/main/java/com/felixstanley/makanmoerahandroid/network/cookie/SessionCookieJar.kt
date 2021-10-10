@@ -10,8 +10,11 @@ object SessionCookieJar : CookieJar {
     var cookies: MutableList<Cookie> = mutableListOf<Cookie>()
 
     override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
-        // Always save All Cookies
-        this.cookies = cookies
+        // Update and Save All Cookies
+        for (newCookie in cookies.listIterator()) {
+            this.cookies.removeIf({ cookie -> cookie.name().equals(newCookie.name()) })
+            this.cookies.add(newCookie)
+        }
     }
 
     override fun loadForRequest(url: HttpUrl): MutableList<Cookie> {
