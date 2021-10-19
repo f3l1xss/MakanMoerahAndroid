@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:icon="@drawable/store_icon"
+        android:title="@string/home_bottom_menu_label" />
+    <item
+        android:id="@+id/exploreFragment"
+        android:enabled="true"
+        android:icon="@drawable/search_icon"
+        android:title="@string/explore_bottom_menu_label" />
+    <item
+        android:id="@+id/bookingFragment"
+        android:enabled="true"
+        android:icon="@drawable/phone_icon"
+        android:title="@string/booking_bottom_menu_label" />
+    <item
+        android:id="@+id/reservationFragment"
+        android:enabled="true"
+        android:icon="@drawable/bookmark_added_icon"
+        android:title="@string/reservation_bottom_menu_label" />
+    <item
+        android:id="@+id/accountFragment"
+        android:enabled="true"
+        android:icon="@drawable/person_icon"
+        android:title="@string/account_bottom_menu_label" />
+</menu>

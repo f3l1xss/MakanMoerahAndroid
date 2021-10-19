@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MakanMoerahAndroid</string>
+    <string name="home_bottom_menu_label">Home</string>
+    <string name="explore_bottom_menu_label">Explore</string>
+    <string name="booking_bottom_menu_label">Booking</string>
+    <string name="reservation_bottom_menu_label">Reservation</string>
+    <string name="account_bottom_menu_label">Account</string>
 </resources>

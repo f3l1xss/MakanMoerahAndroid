@@ -6,6 +6,7 @@ buildscript {
         version_timber = "5.0.1"
         version_coroutine = "1.5.2"
         version_safety_net = "17.0.1"
+        version_navigation = "2.3.5"
     }
     repositories {
         google()
