@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="RestaurantCardCarousel">
+        <attr name="criteria" format="string" />
+        <attr name="criteriaValue" format="string" />
+    </declare-styleable>
+</resources>

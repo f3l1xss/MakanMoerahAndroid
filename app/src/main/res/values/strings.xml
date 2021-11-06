@@ -5,4 +5,7 @@
     <string name="booking_bottom_menu_label">Booking</string>
     <string name="reservation_bottom_menu_label">Reservation</string>
     <string name="account_bottom_menu_label">Account</string>
+
+    <!-- Restaurant Card -->
+    <string name="restaurant_card_image_content_description">Restaurant Image</string>
 </resources>

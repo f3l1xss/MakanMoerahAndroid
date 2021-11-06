@@ -12,8 +12,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object Configuration {
 
-    /*private const val BASE_URL = "https://makanmoerah.com/api/"*/
-    private const val BASE_URL = "http://localhost:8080/api/"
+    private const val BASE_URL = "https://makanmoerah.com/api/"
+
+    /*private const val BASE_URL = "http://localhost:8080/api/"*/
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(AjaxHeaderInterceptor())
         .addInterceptor(CsrfTokenHeaderInterceptor())

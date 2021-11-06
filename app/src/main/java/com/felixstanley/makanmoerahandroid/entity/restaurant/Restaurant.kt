@@ -27,7 +27,7 @@ data class Restaurant(
     // Create Restaurant Variables
     val usersId: Int,
     val cityId: Int,
-    val capacities: List<RestaurantCapacity>,
-    val minimumSpends: List<List<RestaurantMinimumSpend>>,
-    val mergedCapacities: List<List<RestaurantCapacity>>
+    val capacities: List<RestaurantCapacity>?,
+    val minimumSpends: List<List<RestaurantMinimumSpend>>?,
+    val mergedCapacities: List<List<RestaurantCapacity>>?
 )
