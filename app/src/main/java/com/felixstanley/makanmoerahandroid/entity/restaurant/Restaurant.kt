@@ -14,14 +14,14 @@ data class Restaurant(
     val restaurantHolidayHours: List<RestaurantHolidayHours>?,
     val restaurantImages: List<RestaurantImage>,
     val menus: List<Menu>?,
-    val facilities: List<Facility>,
+    val facilities: List<Facility>?,
     val paymentModes: List<PaymentMode>?,
     val reviewElastics: List<ReviewElastic>?,
     val restaurantCapacities: List<RestaurantCapacity>?,
     val phone: String,
     val foodCategory: String,
     val priceCategory: Short,
-    val averageStar: Double,
+    val averageStar: Double?,
     val description: String,
 
     // Create Restaurant Variables

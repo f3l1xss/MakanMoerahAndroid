@@ -1,7 +1,11 @@
 package com.felixstanley.makanmoerahandroid.entity.enums
 
-enum class RestaurantCriteria {
+enum class RestaurantCriteria(val title: String) {
 
-    TOP, RECOMMENDED, NEARBY, NEW, FOOD_CATEGORY, CITY, BREAKFAST, LUNCH, DINNER, SUPPER, FACILITY, SIMILAR_TO_LAST_BOOKING, SIMILAR_TO_RESTAURANT, PRICE_CATEGORY
+    TOP("Top"), RECOMMENDED("Recommended"), NEARBY("Nearby"), NEW("New"),
+    FOOD_CATEGORY("Food Category"), CITY("City"), BREAKFAST("Breakfast"), LUNCH("Lunch"),
+    DINNER("Dinner"), SUPPER("Supper"), FACILITY("Facility"),
+    SIMILAR_TO_LAST_BOOKING("Similar To Last Booking"),
+    SIMILAR_TO_RESTAURANT("Similar To This"), PRICE_CATEGORY("Price Category")
 
 }

@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.HomeFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-</FrameLayout>
+        <variable
+            name="homeViewModel"
+            type="com.felixstanley.makanmoerahandroid.fragment.home.HomeViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/home_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".fragment.home.HomeFragment">
+
+            <!-- Restaurant Card Carousels will be added dynamically here -->
+
+        </LinearLayout>
+    </ScrollView>
+
+</layout>

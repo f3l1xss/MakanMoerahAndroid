@@ -26,12 +26,12 @@ class RestaurantCardCarousel @JvmOverloads constructor(
     private lateinit var viewModel: RestaurantCardCarouselViewModel
     private lateinit var viewModelFactory: RestaurantCardCarouselViewModelFactory
 
+    var criteria: String? = null
+    var criteriaValue: String? = null
+
     init {
         val layoutInflater = LayoutInflater.from(context)
         val binding = RestaurantCardCarouselBinding.inflate(layoutInflater, this, true)
-
-        var criteria: String? = null
-        var criteriaValue: String? = null
 
         // Obtain Necessary Attributes
         context.withStyledAttributes(attrs, R.styleable.RestaurantCardCarousel) {
@@ -39,22 +39,25 @@ class RestaurantCardCarousel @JvmOverloads constructor(
             criteriaValue = getString(R.styleable.RestaurantCardCarousel_criteriaValue)
         }
 
-        // Validate that required attributes are not null
-        if (criteria == null || RestaurantCriteria.values()
-                .firstOrNull { it.name.equals(criteria) } == null || criteriaValue == null
-        ) {
-            Timber.e("Required Attributes missing / Invalid at RestaurantCardCarousel")
-            throw NullPointerException()
-        }
-
         doOnAttach {
+            // Validate that required attributes are not null
+            if (criteria == null || RestaurantCriteria.values()
+                    .firstOrNull { it.name.equals(criteria) } == null || criteriaValue == null
+            ) {
+                Timber.e("Required Attributes missing / Invalid at RestaurantCardCarousel")
+                throw NullPointerException()
+            }
+
             // Initialize ViewModelFactory & ViewModel
             viewModelFactory = RestaurantCardCarouselViewModelFactory(
                 NetworkApi.restaurantService, RestaurantCriteria.valueOf(criteria!!),
                 criteriaValue!!
             )
+            // Need to Create Unique ViewModel based on combination of criteria + criteria value
+            // as each viewModel will need to return different Restaurant List based on
+            // criteria + criteria value
             viewModel = ViewModelProvider(findViewTreeViewModelStoreOwner()!!, viewModelFactory)
-                .get(RestaurantCardCarouselViewModel::class.java)
+                .get(criteria + criteriaValue, RestaurantCardCarouselViewModel::class.java)
 
             // Initialize Data Binding Variables
             // TODO: Find out if this is needed
