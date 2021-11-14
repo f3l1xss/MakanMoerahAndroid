@@ -9,7 +9,7 @@ import com.felixstanley.makanmoerahandroid.network.service.RestaurantService
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
-class HomeViewModel(val restaurantService: RestaurantService) : ViewModel() {
+class HomeViewModel(private val restaurantService: RestaurantService) : ViewModel() {
 
     private val _restaurantCriteriaWithValues = MutableLiveData<Set<RestaurantCriteriaWithValue>>()
     val restaurantCriteriaWithValues: LiveData<Set<RestaurantCriteriaWithValue>>

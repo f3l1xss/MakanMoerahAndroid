@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 class RestaurantCardCarouselViewModel(
-    val restaurantService: RestaurantService,
+    private val restaurantService: RestaurantService,
     val criteria: RestaurantCriteria,
     val criteriaValue: String
 ) : ViewModel() {

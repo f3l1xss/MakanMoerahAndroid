@@ -9,7 +9,7 @@
             type="com.felixstanley.makanmoerahandroid.entity.restaurant.Restaurant" />
     </data>
 
-    <!-- Each Restaurant Card Width & Height will be adjusted by RecyclerViewAdapter
+    <!-- Each Restaurant Card Width will be adjusted by RecyclerViewAdapter
       to match 60% Parent Width -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/restaurant_card"

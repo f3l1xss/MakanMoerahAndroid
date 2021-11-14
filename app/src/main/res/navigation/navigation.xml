@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/exploreFragment"
-        android:name="com.felixstanley.makanmoerahandroid.fragment.ExploreFragment"
+        android:name="com.felixstanley.makanmoerahandroid.fragment.explore.ExploreFragment"
         android:label="fragment_explore"
         tools:layout="@layout/fragment_explore" />
     <fragment
