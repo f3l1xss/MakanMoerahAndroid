@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.felixstanley.makanmoerahandroid.databinding.FragmentExploreBinding
 import com.felixstanley.makanmoerahandroid.fragment.AbstractFragment
 import com.felixstanley.makanmoerahandroid.network.api.NetworkApi
@@ -36,8 +37,33 @@ class ExploreFragment : AbstractFragment() {
         binding.restaurantList.adapter = adapter
         binding.restaurantList.layoutManager = manager
 
+        // Initialize RecyclerView OnScrollListener
+        // to implement endless / infinite scrolling
+        var loading = false
+        binding.restaurantList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                // Reached Bottom Of List, Fetch New Set of Items if Available
+                if (!loading && !recyclerView.canScrollVertically(1)) {
+                    loading = true
+                    viewModel.getNextDataSet()
+                }
+            }
+        })
+
+        // Observe to ViewModel Live Data Variables
         viewModel.restaurantEntitiesPage.observe(viewLifecycleOwner, { it ->
-            adapter.addList(it.entities)
+            val oldList = adapter.currentList.toMutableList()
+            // Append New Restaurants to oldList
+            oldList.addAll(it.entities)
+            adapter.addList(oldList)
+        })
+        viewModel.newDataSetFetched.observe(viewLifecycleOwner, { it ->
+            if (it == true) {
+                // New Data Set is ready, Set Loading Flag to false
+                // So that Endless Scrolling is allowed again
+                loading = false
+                viewModel.resetNewDataSetFetchedFlag()
+            }
         })
         return binding.root
     }

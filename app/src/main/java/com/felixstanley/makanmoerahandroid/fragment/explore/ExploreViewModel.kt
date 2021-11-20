@@ -17,11 +17,33 @@ class ExploreViewModel(private val restaurantService: RestaurantService) : ViewM
     val restaurantEntitiesPage: LiveData<EntitiesPage<Restaurant>>
         get() = _restaurantEntitiesPage
 
+    // Boolean Flag to Inform Fragment to stop Loading (New Data Set is Fetched)
+    private val _newDataSetFetched = MutableLiveData<Boolean>()
+    val newDataSetFetched: LiveData<Boolean>
+        get() = _newDataSetFetched
+
     init {
+        getRestaurant(1)
+    }
+
+    fun getNextDataSet() {
+        // Obtain Next Page Of Restaurant (If Available)
+        _restaurantEntitiesPage.value?.let {
+            if (it.currentPage < it.totalPages) {
+                getRestaurant(it.currentPage + 1)
+            }
+        }
+    }
+
+    fun resetNewDataSetFetchedFlag() {
+        _newDataSetFetched.value = false
+    }
+
+    private fun getRestaurant(pageNum: Int) {
         viewModelScope.launch {
             // TODO: Refrain from hardcoding below params
             val restaurantEntitiesPage = restaurantService.getRestaurant(
-                1,
+                pageNum,
                 SortCriteria.NEAREST,
                 1.3500416,
                 103.8450688,
@@ -39,6 +61,9 @@ class ExploreViewModel(private val restaurantService: RestaurantService) : ViewM
 
             // Update our LiveData with fetched EntitiesPage
             _restaurantEntitiesPage.value = restaurantEntitiesPage
+
+            // Inform that NewDataSet is Fetched
+            _newDataSetFetched.value = true
         }
     }
 
