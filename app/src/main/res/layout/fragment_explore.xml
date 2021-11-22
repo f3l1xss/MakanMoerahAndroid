@@ -11,18 +11,64 @@
             type="com.felixstanley.makanmoerahandroid.fragment.explore.ExploreViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/restaurant_list"
+        <!-- Restaurant List Item Recycler View -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/restaurant_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Restaurant Filter Expandable Bottom Sheet -->
+        <LinearLayout
+            android:id="@+id/restaurant_filter_bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Bottom Sheet Header -->
+            <LinearLayout
+                android:id="@+id/restaurant_filter_bottom_sheet_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primaryColor"
+                android:orientation="horizontal">
+
+                <!-- Bottom Sheet Close Button -->
+                <ImageView
+                    android:id="@+id/restaurant_filter_bottom_sheet_close_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> exploreViewModel.onCloseBottomSheet()}"
+                    android:src="@drawable/close_icon" />
+
+
+            </LinearLayout>
+
+            <!-- Bottom Sheet Content -->
+            <LinearLayout
+                android:id="@+id/restaurant_filter_bottom_sheet_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/primaryColor"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -6,9 +6,11 @@
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.16203703703703703" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/drawable/bookmark_added_icon.xml" value="0.16111111111111112" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/drawable/bottom_navigation_text_color.xml" value="0.16111111111111112" />
+        <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/drawable/close_icon.xml" value="0.165625" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/drawable/dollar_icon.xml" value="0.16203703703703703" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/drawable/dollar_icon_empty.xml" value="0.16203703703703703" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/drawable/dollar_icon_filled.xml" value="0.16203703703703703" />
+        <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/drawable/filter_icon.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/drawable/ic_broken_image.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/drawable/loading_img.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/drawable/person_icon.xml" value="0.12864583333333332" />
@@ -25,6 +27,8 @@
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/restaurant_list_item.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/sample_restaurant_card_carousel.xml" value="0.2" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.11927083333333334" />
+        <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/menu/explore_fragment_options_menu.xml" value="0.1" />
+        <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
       </map>
     </option>
   </component>

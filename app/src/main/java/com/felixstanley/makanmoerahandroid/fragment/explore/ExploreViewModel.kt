@@ -22,6 +22,11 @@ class ExploreViewModel(private val restaurantService: RestaurantService) : ViewM
     val newDataSetFetched: LiveData<Boolean>
         get() = _newDataSetFetched
 
+    // Boolean Flag to Inform Fragment to Hide Bottom Sheet
+    private val _hideBottomSheet = MutableLiveData<Boolean>()
+    val hideBottomSheet: LiveData<Boolean>
+        get() = _hideBottomSheet
+
     init {
         getRestaurant(1)
     }
@@ -37,6 +42,14 @@ class ExploreViewModel(private val restaurantService: RestaurantService) : ViewM
 
     fun resetNewDataSetFetchedFlag() {
         _newDataSetFetched.value = false
+    }
+
+    fun onCloseBottomSheet() {
+        _hideBottomSheet.value = true
+    }
+
+    fun resetHideBottomSheetFlag() {
+        _hideBottomSheet.value = false
     }
 
     private fun getRestaurant(pageNum: Int) {

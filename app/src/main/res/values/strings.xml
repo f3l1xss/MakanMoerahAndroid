@@ -8,4 +8,7 @@
 
     <!-- Restaurant Card -->
     <string name="restaurant_card_image_content_description">Restaurant Image</string>
+
+    <!-- Explore Fragment -->
+    <string name="explore_fragment_bottom_sheet_filter_options_menu_title">Filter</string>
 </resources>

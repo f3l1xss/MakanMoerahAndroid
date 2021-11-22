@@ -1,20 +1,22 @@
 package com.felixstanley.makanmoerahandroid.fragment.explore
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.felixstanley.makanmoerahandroid.R
 import com.felixstanley.makanmoerahandroid.databinding.FragmentExploreBinding
 import com.felixstanley.makanmoerahandroid.fragment.AbstractFragment
 import com.felixstanley.makanmoerahandroid.network.api.NetworkApi
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class ExploreFragment : AbstractFragment() {
 
     private lateinit var viewModel: ExploreViewModel
     private lateinit var viewModelFactory: ExploreViewModelFactory
+
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,7 +67,49 @@ class ExploreFragment : AbstractFragment() {
                 viewModel.resetNewDataSetFetchedFlag()
             }
         })
+
+        // Initialize Bottom Sheet Behavior
+        val restaurantFilterBottomSheet = binding.restaurantFilterBottomSheet
+        bottomSheetBehavior = BottomSheetBehavior.from(restaurantFilterBottomSheet)
+        bottomSheetBehavior.isHideable = true
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        // Set Skip Collapsed to True as we don't need Half Expanded & Collapsed State
+        bottomSheetBehavior.skipCollapsed = true
+        viewModel.hideBottomSheet.observe(viewLifecycleOwner, { it ->
+            if (it == true) {
+                // Bottom Sheet Close Button Is Clicked, Hide Bottom Sheet
+                hideBottomSheet()
+                viewModel.resetHideBottomSheetFlag()
+            }
+        })
+
+        // Initialize Options Menu
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    private fun expandBottomSheet() {
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    private fun hideBottomSheet() {
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.explore_fragment_options_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            // Expand Bottom Sheet when Filter Option Menu is clicked
+            R.id.options_menu_filter -> {
+                expandBottomSheet()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }

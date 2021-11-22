@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/options_menu_filter"
+        android:icon="@drawable/filter_icon"
+        android:title="@string/explore_fragment_bottom_sheet_filter_options_menu_title"
+        app:iconTint="@color/primaryTextColor"
+        app:showAsAction="always" />
+</menu>
