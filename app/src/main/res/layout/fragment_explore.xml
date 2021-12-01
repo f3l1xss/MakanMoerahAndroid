@@ -59,14 +59,70 @@
             </LinearLayout>
 
             <!-- Bottom Sheet Content -->
-            <LinearLayout
-                android:id="@+id/restaurant_filter_bottom_sheet_content"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/primaryColor"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
-            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/restaurant_filter_bottom_sheet_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/primaryColor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/restaurant_filter_bottom_sheet_city_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/explore_fragment_bottom_sheet_filter_city_header_text"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Add Divider Here -->
+
+                    <!-- City Filter Radio Button -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/restaurant_filter_bottom_sheet_city_filters"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/restaurant_filter_bottom_sheet_district_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/explore_fragment_bottom_sheet_filter_district_header_text"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Add Divider Here -->
+
+                    <!-- District Filter Checkboxes -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/restaurant_filter_bottom_sheet_district_filters"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/restaurant_filter_bottom_sheet_food_category_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/explore_fragment_bottom_sheet_filter_food_category_header_text"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Add Divider Here -->
+
+                    <!-- Food Category Filter Checkboxes -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/restaurant_filter_bottom_sheet_food_category_filters"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
 

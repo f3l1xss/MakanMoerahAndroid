@@ -83,6 +83,34 @@ class ExploreFragment : AbstractFragment() {
             }
         })
 
+        // Initialize City Filter RecyclerViews
+        val cityFilterRadioButtonAdapter = CityFilterRadioButtonAdapter()
+        binding.restaurantFilterBottomSheetCityFilters.adapter = cityFilterRadioButtonAdapter
+        binding.restaurantFilterBottomSheetCityFilters.layoutManager =
+            GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+        viewModel.cityFilters.observe(viewLifecycleOwner, { it ->
+            cityFilterRadioButtonAdapter.addList(it)
+        })
+
+        // Initialize District Filter RecyclerViews
+        val districtFilterCheckboxAdapter = DistrictFoodCategoryCheckBoxAdapter()
+        binding.restaurantFilterBottomSheetDistrictFilters.adapter = districtFilterCheckboxAdapter
+        binding.restaurantFilterBottomSheetDistrictFilters.layoutManager =
+            GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+        viewModel.districtFilters.observe(viewLifecycleOwner, { it ->
+            districtFilterCheckboxAdapter.addList(it)
+        })
+
+        // Initialize Food Category Filter RecyclerViews
+        val foodCategoryFilterCheckboxAdapter = DistrictFoodCategoryCheckBoxAdapter()
+        binding.restaurantFilterBottomSheetFoodCategoryFilters.adapter =
+            foodCategoryFilterCheckboxAdapter
+        binding.restaurantFilterBottomSheetFoodCategoryFilters.layoutManager =
+            GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+        viewModel.foodCategoryFilters.observe(viewLifecycleOwner, { it ->
+            foodCategoryFilterCheckboxAdapter.addList(it)
+        })
+
         // Initialize Options Menu
         setHasOptionsMenu(true)
         return binding.root

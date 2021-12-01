@@ -11,4 +11,7 @@
 
     <!-- Explore Fragment -->
     <string name="explore_fragment_bottom_sheet_filter_options_menu_title">Filter</string>
+    <string name="explore_fragment_bottom_sheet_filter_city_header_text">City</string>
+    <string name="explore_fragment_bottom_sheet_filter_district_header_text">District</string>
+    <string name="explore_fragment_bottom_sheet_filter_food_category_header_text">Food Category</string>
 </resources>
