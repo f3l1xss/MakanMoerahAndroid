@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="explore_fragment_discount_slider_initial_values">
+        <item>20</item>
+        <item>20</item>
+    </array>
+    <array name="explore_fragment_rating_slider_initial_values">
+        <item>1</item>
+        <item>1</item>
+    </array>
+</resources>

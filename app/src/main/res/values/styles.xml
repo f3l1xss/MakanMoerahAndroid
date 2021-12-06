@@ -6,4 +6,24 @@
         <item name="android:maxHeight">48dp</item>
     </style>
 
+    <style name="exploreFragmentSliderStyle" parent="@style/Widget.MaterialComponents.Slider">
+        <item name="labelStyle">@style/exploreFragmentSliderTooltip</item>
+        <item name="materialThemeOverlay">@style/exploreFragmentSliderThemeOverlay</item>
+    </style>
+
+    <style name="exploreFragmentSliderTooltip" parent="Widget.MaterialComponents.Tooltip">
+        <!-- Background Color of the Tooltip -->
+        <item name="backgroundTint">@color/transparentBlue</item>
+    </style>
+
+    <style name="exploreFragmentSliderThemeOverlay" parent="">
+        <!-- Color used by the text in the Tooltip -->
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <!-- Date / Time Picker Dialog Theme -->
+    <style name="pickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:colorAccent">@color/lightBlue</item>
+    </style>
+
 </resources>

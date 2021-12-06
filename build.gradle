@@ -11,6 +11,7 @@ buildscript {
         version_fragment = "1.3.6"
         version_activity = "1.3.1"
         version_glide = "4.12.0"
+        version_flexbox = "3.0.0"
     }
     repositories {
         google()

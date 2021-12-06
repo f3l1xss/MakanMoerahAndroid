@@ -11,7 +11,23 @@
 
     <!-- Explore Fragment -->
     <string name="explore_fragment_bottom_sheet_filter_options_menu_title">Filter</string>
+    <string name="explore_fragment_bottom_sheet_filter_sort_header_text">Sort</string>
+    <string name="explore_fragment_bottom_sheet_filter_sort_button_cheapest_text">Cheapest</string>
+    <string name="explore_fragment_bottom_sheet_filter_sort_button_most_rating_text">Most Rating</string>
+    <string name="explore_fragment_bottom_sheet_filter_sort_button_a_to_z_text">A-Z</string>
+    <string name="explore_fragment_bottom_sheet_filter_sort_button_most_discount_text">Most Discount</string>
+    <string name="explore_fragment_bottom_sheet_filter_sort_button_nearest_text">Nearest</string>
+    <string name="explore_fragment_bottom_sheet_filter_num_of_people_header_text">Number Of People</string>
+    <string name="explore_fragment_bottom_sheet_filter_num_of_people_dropdown_hint">Number Of People</string>
+    <string name="explore_fragment_bottom_sheet_filter_time_header_text">Time</string>
+    <string name="explore_fragment_bottom_sheet_filter_date_header_text">Date</string>
     <string name="explore_fragment_bottom_sheet_filter_city_header_text">City</string>
     <string name="explore_fragment_bottom_sheet_filter_district_header_text">District</string>
     <string name="explore_fragment_bottom_sheet_filter_food_category_header_text">Food Category</string>
+    <string name="explore_fragment_bottom_sheet_filter_price_header_text">Price</string>
+    <string name="explore_fragment_bottom_sheet_filter_price_slider_content_description">Price Slider</string>
+    <string name="explore_fragment_bottom_sheet_filter_discount_header_text">Discount</string>
+    <string name="explore_fragment_bottom_sheet_filter_discount_slider_content_description">Discount Slider</string>
+    <string name="explore_fragment_bottom_sheet_filter_rating_header_text">Rating</string>
+    <string name="explore_fragment_bottom_sheet_filter_rating_slider_content_description">Rating Slider</string>
 </resources>

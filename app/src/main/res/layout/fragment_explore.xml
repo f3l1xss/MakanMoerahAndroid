@@ -71,6 +71,171 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/restaurant_filter_bottom_sheet_sort_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/explore_fragment_bottom_sheet_filter_sort_header_text"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Add Divider Here -->
+
+                    <!-- Sort Radio Group -->
+                    <RadioGroup
+                        android:id="@+id/restaurant_filter_bottom_sheet_sort_radio_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checkedButton="@+id/restaurant_filter_bottom_sheet_sort_radio_button_nearest">
+
+                        <RadioButton
+                            android:id="@+id/restaurant_filter_bottom_sheet_sort_radio_button_cheapest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/explore_fragment_bottom_sheet_filter_sort_button_cheapest_text" />
+
+                        <RadioButton
+                            android:id="@+id/restaurant_filter_bottom_sheet_sort_radio_button_most_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/explore_fragment_bottom_sheet_filter_sort_button_most_rating_text" />
+
+                        <RadioButton
+                            android:id="@+id/restaurant_filter_bottom_sheet_sort_radio_button_a_to_z"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/explore_fragment_bottom_sheet_filter_sort_button_a_to_z_text" />
+
+                        <RadioButton
+                            android:id="@+id/restaurant_filter_bottom_sheet_sort_radio_button_most_discount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/explore_fragment_bottom_sheet_filter_sort_button_most_discount_text" />
+
+                        <RadioButton
+                            android:id="@+id/restaurant_filter_bottom_sheet_sort_radio_button_nearest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/explore_fragment_bottom_sheet_filter_sort_button_nearest_text" />
+
+                    </RadioGroup>
+
+
+                    <!-- TODO: Find out how to have Wrappable Toggle Button (Will use Radio Button for the time being) -->
+                    <!--                    <com.google.android.flexbox.FlexboxLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            app:flexWrap="wrap">
+
+                                            &lt;!&ndash; Sort Toggle Button (Similar to Button Group in Bootstrap) &ndash;&gt;
+                                            <com.google.android.material.button.MaterialButtonToggleGroup
+                                                android:id="@+id/restaurant_filter_bottom_sheet_sort_toggle_button"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content">
+
+                                                <Button
+                                                    android:id="@+id/restaurant_filter_bottom_sheet_sort_button_cheapest"
+                                                    style="?attr/materialButtonOutlinedStyle"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="@string/explore_fragment_bottom_sheet_filter_sort_button_cheapest_text" />
+
+                                                <Button
+                                                    android:id="@+id/restaurant_filter_bottom_sheet_sort_button_most_rating"
+                                                    style="?attr/materialButtonOutlinedStyle"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="@string/explore_fragment_bottom_sheet_filter_sort_button_most_rating_text" />
+
+                                                <Button
+                                                    android:id="@+id/restaurant_filter_bottom_sheet_sort_button_a_to_z"
+                                                    style="?attr/materialButtonOutlinedStyle"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="@string/explore_fragment_bottom_sheet_filter_sort_button_a_to_z_text" />
+
+                                                <Button
+                                                    android:id="@+id/restaurant_filter_bottom_sheet_sort_button_most_discount"
+                                                    style="?attr/materialButtonOutlinedStyle"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="@string/explore_fragment_bottom_sheet_filter_sort_button_most_discount_text" />
+
+                                                <Button
+                                                    android:id="@+id/restaurant_filter_bottom_sheet_sort_button_nearest"
+                                                    style="?attr/materialButtonOutlinedStyle"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="@string/explore_fragment_bottom_sheet_filter_sort_button_nearest_text" />
+
+                                            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                                        </com.google.android.flexbox.FlexboxLayout>-->
+
+                    <TextView
+                        android:id="@+id/restaurant_filter_bottom_sheet_num_of_people_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/explore_fragment_bottom_sheet_filter_num_of_people_header_text"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Number Of People Exposed Dropdown -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/restaurant_filter_bottom_sheet_num_of_people_exposed_dropdown"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/explore_fragment_bottom_sheet_filter_num_of_people_dropdown_hint">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/restaurant_filter_bottom_sheet_num_of_people_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/restaurant_filter_bottom_sheet_date_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/explore_fragment_bottom_sheet_filter_date_header_text"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Date Edit Text -->
+                    <EditText
+                        android:id="@+id/restaurant_filter_bottom_sheet_date_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
+
+                    <TextView
+                        android:id="@+id/restaurant_filter_bottom_sheet_time_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/explore_fragment_bottom_sheet_filter_time_header_text"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Time Edit Text -->
+                    <EditText
+                        android:id="@+id/restaurant_filter_bottom_sheet_time_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
+
+                    <TextView
                         android:id="@+id/restaurant_filter_bottom_sheet_city_header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -120,6 +285,100 @@
                         android:id="@+id/restaurant_filter_bottom_sheet_food_category_filters"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/restaurant_filter_bottom_sheet_price_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/explore_fragment_bottom_sheet_filter_price_header_text"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Add Divider Here -->
+
+                    <!-- Price Slider -->
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/restaurant_filter_bottom_sheet_price_slider"
+                        style="@style/exploreFragmentSliderStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/explore_fragment_bottom_sheet_filter_price_slider_content_description"
+                        android:stepSize="1"
+                        android:value="1"
+                        android:valueFrom="1"
+                        android:valueTo="5"
+                        app:thumbColor="#85c0ff"
+                        app:tickColorActive="#ffffff"
+                        app:tickColorInactive="#85c0ff"
+                        app:trackColorActive="#85c0ff"
+                        app:trackColorInactive="#d8e0f3" />
+
+                    <TextView
+                        android:id="@+id/restaurant_filter_bottom_sheet_discount_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/explore_fragment_bottom_sheet_filter_discount_header_text"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Add Divider Here -->
+
+                    <!-- Discount Slider -->
+                    <com.google.android.material.slider.RangeSlider
+                        android:id="@+id/restaurant_filter_bottom_sheet_discount_slider"
+                        style="@style/exploreFragmentSliderStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/explore_fragment_bottom_sheet_filter_discount_slider_content_description"
+                        android:stepSize="20"
+                        android:valueFrom="20"
+                        android:valueTo="100"
+                        app:thumbColor="#85c0ff"
+                        app:tickColorActive="#ffffff"
+                        app:tickColorInactive="#85c0ff"
+                        app:trackColorActive="#85c0ff"
+                        app:trackColorInactive="#d8e0f3"
+                        app:values="@array/explore_fragment_discount_slider_initial_values" />
+
+                    <TextView
+                        android:id="@+id/restaurant_filter_bottom_sheet_rating_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/explore_fragment_bottom_sheet_filter_rating_header_text"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Add Divider Here -->
+
+                    <!-- Rating Slider -->
+                    <com.google.android.material.slider.RangeSlider
+                        android:id="@+id/restaurant_filter_bottom_sheet_rating_slider"
+                        style="@style/exploreFragmentSliderStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/explore_fragment_bottom_sheet_filter_rating_slider_content_description"
+                        android:stepSize="1"
+                        android:valueFrom="1"
+                        android:valueTo="5"
+                        app:thumbColor="#85c0ff"
+                        app:tickColorActive="#ffffff"
+                        app:tickColorInactive="#85c0ff"
+                        app:trackColorActive="#85c0ff"
+                        app:trackColorInactive="#d8e0f3"
+                        app:values="@array/explore_fragment_rating_slider_initial_values" />
+
+                    <!-- Simply exist to temporarily handle fit height problem, TODO delete this-->
+                    <TextView
+                        android:id="@+id/deleteThis"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>

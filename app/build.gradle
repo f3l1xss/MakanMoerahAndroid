@@ -76,4 +76,8 @@ dependencies {
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$version_glide"
+
+    // Google Flexbox
+    // Uncomment to use Flex wrap needed at explore fragment sort filter
+    //implementation "com.google.android.flexbox:flexbox:$version_flexbox"
 }
