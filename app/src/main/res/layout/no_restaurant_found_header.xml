@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/restaurant_list_no_restaurant_found_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/explore_fragment_restaurant_list_no_restaurant_found_header_text"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+</layout>

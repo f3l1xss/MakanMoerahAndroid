@@ -7,6 +7,12 @@ object Constants {
     // Component Height
     const val RESTAURANT_CARD_CAROUSEL_HEIGHT_DP = 440
 
+    // Default Booking Minute Interval
+    const val DEFAULT_BOOKING_MINUTE_INTERVAL = 30
+
+    // Backend API Null Representation
+    const val NULL_REPRESENTATION = -1
+
     // Explore Fragment Number Of People Dropdown Items
     val EXPLORE_FRAGMENT_NUM_OF_PEOPLE_DROPDOWN_ITEMS = listOf(
         "1",

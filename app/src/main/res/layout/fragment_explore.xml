@@ -60,6 +60,7 @@
 
             <!-- Bottom Sheet Content -->
             <androidx.core.widget.NestedScrollView
+                android:id="@+id/restaurant_filter_bottom_sheet_content_nested_scroll_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -369,6 +370,17 @@
                         app:trackColorActive="#85c0ff"
                         app:trackColorInactive="#d8e0f3"
                         app:values="@array/explore_fragment_rating_slider_initial_values" />
+
+                    <!-- Apply Filter Button -->
+                    <Button
+                        android:id="@+id/restaurant_filter_bottom_sheet_apply_filter_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{() -> exploreViewModel.onApplyFilterButtonClicked()}"
+                        android:text="@string/explore_fragment_bottom_sheet_filter_apply_filter_button_text"
+                        android:textColor="@color/primaryColor"
+                        android:textSize="17sp"
+                        app:backgroundTint="@color/lightBlue" />
 
                     <!-- Simply exist to temporarily handle fit height problem, TODO delete this-->
                     <TextView

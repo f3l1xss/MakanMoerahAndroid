@@ -2,6 +2,7 @@ package com.felixstanley.makanmoerahandroid.fragment.explore
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CityFilterRadioButtonAdapter :
+class CityFilterRadioButtonAdapter(private val onCheckedChangeListener: CompoundButton.OnCheckedChangeListener) :
     ListAdapter<String, RecyclerView.ViewHolder>(StringDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -47,7 +48,8 @@ class CityFilterRadioButtonAdapter :
         fun bind(
             cityFilter: String,
             currentItemPosition: Int,
-            radioButtonLastCheckedPosition: Int
+            radioButtonLastCheckedPosition: Int,
+            onCheckedChangeListener: CompoundButton.OnCheckedChangeListener
         ) {
             // Set Root ID (RadioButton XML Element) with PREFIX + cityFilter ID
             binding.root.id = (CITY_FILTER_RADIO_BUTTON_ID_PREFIX + cityFilter).hashCode()
@@ -57,6 +59,8 @@ class CityFilterRadioButtonAdapter :
             // as Last Checked Position (This check will occur again whenever each radio button
             // is selected (Triggered by NotifyItemChanged at RadioButton Listener))
             binding.radioButton.isChecked = currentItemPosition == radioButtonLastCheckedPosition
+            // Set Radio Button On Checked Change Listener
+            binding.radioButton.setOnCheckedChangeListener(onCheckedChangeListener)
             binding.executePendingBindings()
         }
     }
@@ -68,7 +72,12 @@ class CityFilterRadioButtonAdapter :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is CityFilterRadioButtonViewHolder -> {
-                holder.bind(getItem(position), position, radioButtonLastCheckedPosition)
+                holder.bind(
+                    getItem(position),
+                    position,
+                    radioButtonLastCheckedPosition,
+                    onCheckedChangeListener
+                )
 
                 // Add Listener to maintain single selection radio button
                 if (!holder.binding.radioButton.hasOnClickListeners()) {
