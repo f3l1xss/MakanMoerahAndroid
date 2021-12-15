@@ -29,6 +29,7 @@ import java.util.*
 
 class ExploreFragment : AbstractFragment() {
 
+    private lateinit var binding: FragmentExploreBinding
     private lateinit var viewModel: ExploreViewModel
     private lateinit var viewModelFactory: ExploreViewModelFactory
 
@@ -48,7 +49,7 @@ class ExploreFragment : AbstractFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate Explore Fragment
-        val binding = FragmentExploreBinding.inflate(inflater)
+        binding = FragmentExploreBinding.inflate(inflater)
 
         // Initialize ViewModelFactory & ViewModel
         viewModelFactory = ExploreViewModelFactory(NetworkApi.restaurantService)
@@ -56,11 +57,32 @@ class ExploreFragment : AbstractFragment() {
             .get(ExploreViewModel::class.java)
 
         // Initialize Data Binding Variables
+        binding.lifecycleOwner = this
+        binding.exploreViewModel = viewModel
+
+        initializeRestaurantListRecyclerView()
+        initializeBottomSheetBehavior()
+        initializeSortRadioGroup()
+        initializeCityFilterRecyclerView()
+        initializeDistrictFilterRecyclerView()
+        initializeFoodCategoryFilterRecyclerView()
+        initializePriceSlider()
+        initializeDiscountSlider()
+        initializeRatingSlider()
+        initializeNumOfPeopleDropdown()
+        initializeDateEditText()
+        initializeTimeEditText()
+
+        // Initialize Options Menu
+        setHasOptionsMenu(true)
+        return binding.root
+    }
+
+    private fun initializeRestaurantListRecyclerView() {
         // TODO: Find out if we can use context for layout manager below
         val manager = GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)
         val adapter = RestaurantListItemAdapter()
-        binding.lifecycleOwner = this
-        binding.exploreViewModel = viewModel
+
         binding.restaurantList.adapter = adapter
         binding.restaurantList.layoutManager = manager
 
@@ -109,8 +131,9 @@ class ExploreFragment : AbstractFragment() {
             hideBottomSheet()
             binding.restaurantFilterBottomSheetContentNestedScrollView.scrollTo(0, 0)
         })
+    }
 
-        // Initialize Bottom Sheet Behavior
+    private fun initializeBottomSheetBehavior() {
         val restaurantFilterBottomSheet = binding.restaurantFilterBottomSheet
         bottomSheetBehavior = BottomSheetBehavior.from(restaurantFilterBottomSheet)
         bottomSheetBehavior.isHideable = true
@@ -124,7 +147,9 @@ class ExploreFragment : AbstractFragment() {
                 viewModel.resetHideBottomSheetFlag()
             }
         })
+    }
 
+    private fun initializeSortRadioGroup() {
         // Add Sort Radio Group On Click Listener
         val sortRadioGroup = binding.restaurantFilterBottomSheetSortRadioGroup
         sortRadioGroup.setOnCheckedChangeListener { radioGroup: RadioGroup, checkedId: Int ->
@@ -139,8 +164,9 @@ class ExploreFragment : AbstractFragment() {
             // Update ViewModel Current Sort according to checked Radio Button
             viewModel.updateCurrentSort(selectedSortCriteria)
         }
+    }
 
-        // Initialize City Filter RecyclerViews
+    private fun initializeCityFilterRecyclerView() {
         val cityFilterRadioButtonAdapter =
             CityFilterRadioButtonAdapter { buttonView: CompoundButton, isChecked: Boolean ->
                 // Update ViewModel Current City ID upon Checkbox Change
@@ -152,8 +178,9 @@ class ExploreFragment : AbstractFragment() {
         viewModel.cityFilters.observe(viewLifecycleOwner, { it ->
             cityFilterRadioButtonAdapter.addList(it)
         })
+    }
 
-        // Initialize District Filter RecyclerViews
+    private fun initializeDistrictFilterRecyclerView() {
         val districtFilterCheckboxAdapter =
             DistrictFoodCategoryCheckBoxAdapter { buttonView: CompoundButton, isChecked: Boolean ->
                 // Update ViewModel Current Districts upon Checkbox Change
@@ -165,8 +192,9 @@ class ExploreFragment : AbstractFragment() {
         viewModel.districtFilters.observe(viewLifecycleOwner, { it ->
             districtFilterCheckboxAdapter.addList(it, true)
         })
+    }
 
-        // Initialize Food Category Filter RecyclerViews
+    private fun initializeFoodCategoryFilterRecyclerView() {
         val foodCategoryFilterCheckboxAdapter =
             DistrictFoodCategoryCheckBoxAdapter { buttonView: CompoundButton, isChecked: Boolean ->
                 // Update ViewModel Current Food Categories upon Checkbox Change
@@ -179,7 +207,9 @@ class ExploreFragment : AbstractFragment() {
         viewModel.foodCategoryFilters.observe(viewLifecycleOwner, { it ->
             foodCategoryFilterCheckboxAdapter.addList(it, false)
         })
+    }
 
+    private fun initializePriceSlider() {
         val priceSlider = binding.restaurantFilterBottomSheetPriceSlider
         // Add Price Slider On Change Listener
         priceSlider.addOnChangeListener { slider: Slider, value: Float, fromUser: Boolean ->
@@ -197,7 +227,9 @@ class ExploreFragment : AbstractFragment() {
                 else -> "$$$$$"
             }
         }
+    }
 
+    private fun initializeDiscountSlider() {
         val discountSlider = binding.restaurantFilterBottomSheetDiscountSlider
         // Add Discount Slider On Change Listener
         discountSlider.addOnChangeListener { slider: RangeSlider, value: Float, fromUser: Boolean ->
@@ -208,7 +240,9 @@ class ExploreFragment : AbstractFragment() {
         discountSlider.setLabelFormatter { labelValue ->
             "${labelValue.toInt()}%"
         }
+    }
 
+    private fun initializeRatingSlider() {
         val ratingSlider = binding.restaurantFilterBottomSheetRatingSlider
         // Add Rating Slider On Change Listener
         ratingSlider.addOnChangeListener { slider: RangeSlider, value: Float, fromUser: Boolean ->
@@ -226,7 +260,9 @@ class ExploreFragment : AbstractFragment() {
                 else -> "★★★★★"
             }
         }
+    }
 
+    private fun initializeNumOfPeopleDropdown() {
         // Initialize Number Of People Exposed Dropdown List Item
         val numberOfPeopleItemAdapter =
             ArrayAdapter(
@@ -244,7 +280,9 @@ class ExploreFragment : AbstractFragment() {
             // Update ViewModel current numOfPeople
             viewModel.updateCurrentNumOfPeople(text.toString().toShort())
         }
+    }
 
+    private fun initializeDateEditText() {
         // Initialize Date Edit Text to show Date Picker Dialog Upon Click
         restaurantFilterBottomSheetDateEditText = binding.restaurantFilterBottomSheetDateEditText
         val datePickerDialogListener =
@@ -271,7 +309,14 @@ class ExploreFragment : AbstractFragment() {
         }
         // Update Date Edit Text Once to set Text as current Date
         updateDateEditText()
+    }
 
+    private fun updateDateEditText() {
+        // Update Date Edit Text Content to current value of dateEditTextCalendar
+        restaurantFilterBottomSheetDateEditText.setText(dateFormat.format(dateEditTextCalendar.time))
+    }
+
+    private fun initializeTimeEditText() {
         // Initialize Time Edit Text to Show Time Picker Dialog Upon Click
         restaurantFilterBottomSheetTimeEditText = binding.restaurantFilterBottomSheetTimeEditText
         val timePickerDialogListener = TimePickerDialog.OnTimeSetListener { view, hour, minute ->
@@ -293,15 +338,6 @@ class ExploreFragment : AbstractFragment() {
         }
         // Update Time Edit Text Once to set Text as current Time
         updateTimeEditText()
-
-        // Initialize Options Menu
-        setHasOptionsMenu(true)
-        return binding.root
-    }
-
-    private fun updateDateEditText() {
-        // Update Date Edit Text Content to current value of dateEditTextCalendar
-        restaurantFilterBottomSheetDateEditText.setText(dateFormat.format(dateEditTextCalendar.time))
     }
 
     private fun updateTimeEditText() {
