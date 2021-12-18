@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.RadioGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
