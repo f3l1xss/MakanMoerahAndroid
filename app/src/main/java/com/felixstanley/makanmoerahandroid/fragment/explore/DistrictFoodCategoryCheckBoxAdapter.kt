@@ -18,7 +18,10 @@ private const val ITEM_VIEW_TYPE_CHECKBOX_VALUE = 0
 private const val ITEM_VIEW_TYPE_NO_DISTRICT_AVAILABLE_HEADER = 1
 private const val ITEM_VIEW_TYPE_NO_FOOD_CATEGORY_AVAILABLE_HEADER = 2
 
-class DistrictFoodCategoryCheckBoxAdapter(private val onCheckedChangeListener: CompoundButton.OnCheckedChangeListener) :
+class DistrictFoodCategoryCheckBoxAdapter(
+    var currentCheckboxSelection: List<String>,
+    private val onCheckedChangeListener: CompoundButton.OnCheckedChangeListener
+) :
     ListAdapter<DistrictFoodCategoryCheckboxDataItem, RecyclerView.ViewHolder>(
         DistrictFoodCategoryCheckboxDataItemDiffCallback()
     ) {
@@ -90,10 +93,19 @@ class DistrictFoodCategoryCheckBoxAdapter(private val onCheckedChangeListener: C
             }
         }
 
-        fun bind(item: String, onCheckedChangeListener: CompoundButton.OnCheckedChangeListener) {
+        fun bind(
+            item: String,
+            onCheckedChangeListener: CompoundButton.OnCheckedChangeListener,
+            currentCheckboxSelection: List<String>
+        ) {
             // Set Root ID to each individual string item hashcode
             binding.root.id = (DISTRICT_FOOD_CATEGORY_FILTER_CHECKBOX_ID_PREFIX + item).hashCode()
-            // Set Checkbox On Checked Change Listener
+            // Set Checkbox Is Checked Value on whether current Item is preselected already
+            // as part of currentCheckboxSelection Parameters (CurrentCheckboxSelection will
+            // be populated when User make a selection and then performing screen rotation)
+            binding.checkbox.isChecked = currentCheckboxSelection.contains(item)
+            // Set Checkbox On Checked Change Listener (need to do it after checked state is determined,
+            // otherwise setting checked state will trigger the listener)
             binding.checkbox.setOnCheckedChangeListener(onCheckedChangeListener)
             binding.text = item
             binding.executePendingBindings()
@@ -116,7 +128,11 @@ class DistrictFoodCategoryCheckBoxAdapter(private val onCheckedChangeListener: C
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is DistrictFoodCategoryCheckBoxViewHolder -> {
-                holder.bind(getItem(position).value, onCheckedChangeListener)
+                holder.bind(
+                    getItem(position).value,
+                    onCheckedChangeListener,
+                    currentCheckboxSelection
+                )
             }
         }
     }

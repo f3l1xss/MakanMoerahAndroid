@@ -23,8 +23,6 @@ import com.felixstanley.makanmoerahandroid.utility.Utility
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.Slider
-import java.text.SimpleDateFormat
-import java.time.LocalTime
 import java.util.*
 
 class ExploreFragment : AbstractFragment() {
@@ -36,13 +34,6 @@ class ExploreFragment : AbstractFragment() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private lateinit var restaurantFilterBottomSheetDateEditText: EditText
     private lateinit var restaurantFilterBottomSheetTimeEditText: EditText
-
-    // Stores Latest Value of Date selected via Date Edit Text
-    private val dateEditTextCalendar = Calendar.getInstance()
-    private val dateFormat = SimpleDateFormat("dd-MM-yyyy")
-
-    // Stores Latest Value of Time selected via Time Edit Text
-    private var timeEditTextTime = LocalTime.now()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -168,7 +159,7 @@ class ExploreFragment : AbstractFragment() {
 
     private fun initializeCityFilterRecyclerView() {
         val cityFilterRadioButtonAdapter =
-            CityFilterRadioButtonAdapter { buttonView: CompoundButton, isChecked: Boolean ->
+            CityFilterRadioButtonAdapter(viewModel.getCurrentCityName()) { buttonView: CompoundButton, isChecked: Boolean ->
                 // Update ViewModel Current City ID upon Checkbox Change
                 viewModel.updateCurrentCityId(buttonView.text.toString(), isChecked)
             }
@@ -182,7 +173,7 @@ class ExploreFragment : AbstractFragment() {
 
     private fun initializeDistrictFilterRecyclerView() {
         val districtFilterCheckboxAdapter =
-            DistrictFoodCategoryCheckBoxAdapter { buttonView: CompoundButton, isChecked: Boolean ->
+            DistrictFoodCategoryCheckBoxAdapter(viewModel.getCurrentDistricts()) { buttonView: CompoundButton, isChecked: Boolean ->
                 // Update ViewModel Current Districts upon Checkbox Change
                 viewModel.updateCurrentDistricts(buttonView.text.toString(), isChecked)
             }
@@ -192,11 +183,21 @@ class ExploreFragment : AbstractFragment() {
         viewModel.districtFilters.observe(viewLifecycleOwner, { it ->
             districtFilterCheckboxAdapter.addList(it, true)
         })
+
+        // Notify RecyclerView whenever DistrictFilters got reset
+        viewModel.districtFiltersReset.observe(viewLifecycleOwner, { it ->
+            if (it == true) {
+                districtFilterCheckboxAdapter.currentCheckboxSelection =
+                    viewModel.getCurrentDistricts()
+                districtFilterCheckboxAdapter.notifyDataSetChanged()
+                viewModel.resetDistrictFiltersResetFlag()
+            }
+        })
     }
 
     private fun initializeFoodCategoryFilterRecyclerView() {
         val foodCategoryFilterCheckboxAdapter =
-            DistrictFoodCategoryCheckBoxAdapter { buttonView: CompoundButton, isChecked: Boolean ->
+            DistrictFoodCategoryCheckBoxAdapter(viewModel.getCurrentFoodCategories()) { buttonView: CompoundButton, isChecked: Boolean ->
                 // Update ViewModel Current Food Categories upon Checkbox Change
                 viewModel.updateCurrentFoodCategories(buttonView.text.toString(), isChecked)
             }
@@ -207,14 +208,27 @@ class ExploreFragment : AbstractFragment() {
         viewModel.foodCategoryFilters.observe(viewLifecycleOwner, { it ->
             foodCategoryFilterCheckboxAdapter.addList(it, false)
         })
+
+        // Notify RecyclerView whenever DistrictFilters got reset
+        viewModel.foodCategoriesFiltersReset.observe(viewLifecycleOwner, { it ->
+            if (it == true) {
+                foodCategoryFilterCheckboxAdapter.currentCheckboxSelection =
+                    viewModel.getCurrentFoodCategories()
+                foodCategoryFilterCheckboxAdapter.notifyDataSetChanged()
+                viewModel.resetFoodCategoriesResetFlag()
+            }
+        })
     }
 
     private fun initializePriceSlider() {
         val priceSlider = binding.restaurantFilterBottomSheetPriceSlider
         // Add Price Slider On Change Listener
         priceSlider.addOnChangeListener { slider: Slider, value: Float, fromUser: Boolean ->
-            // Update ViewModel Current Price according to slider value
-            viewModel.updatePrice(value.toInt())
+            // Only Care about FromUser Event
+            if (fromUser) {
+                // Update ViewModel Current Price according to slider value
+                viewModel.updatePrice(value.toInt())
+            }
         }
         // Adjust Price Slider Label Formatter
         priceSlider.setLabelFormatter { labelValue ->
@@ -233,8 +247,11 @@ class ExploreFragment : AbstractFragment() {
         val discountSlider = binding.restaurantFilterBottomSheetDiscountSlider
         // Add Discount Slider On Change Listener
         discountSlider.addOnChangeListener { slider: RangeSlider, value: Float, fromUser: Boolean ->
-            // Update ViewModel Current Discount according to slider value
-            viewModel.updateDiscount(slider.values[0].toInt(), slider.values[1].toInt())
+            // Only Care about FromUser Event
+            if (fromUser) {
+                // Update ViewModel Current Discount according to slider value
+                viewModel.updateDiscount(slider.values[0].toInt(), slider.values[1].toInt())
+            }
         }
         // Adjust Discount Slider Label Formatter
         discountSlider.setLabelFormatter { labelValue ->
@@ -246,8 +263,11 @@ class ExploreFragment : AbstractFragment() {
         val ratingSlider = binding.restaurantFilterBottomSheetRatingSlider
         // Add Rating Slider On Change Listener
         ratingSlider.addOnChangeListener { slider: RangeSlider, value: Float, fromUser: Boolean ->
-            // Update ViewModel Current Rating according to slider value
-            viewModel.updateRating(slider.values[0].toInt(), slider.values[1].toInt())
+            // Only Care about FromUser Event
+            if (fromUser) {
+                // Update ViewModel Current Rating according to slider value
+                viewModel.updateRating(slider.values[0].toInt(), slider.values[1].toInt())
+            }
         }
         // Adjust Rating Slider Label Formatter
         ratingSlider.setLabelFormatter { labelValue ->
@@ -287,67 +307,62 @@ class ExploreFragment : AbstractFragment() {
         restaurantFilterBottomSheetDateEditText = binding.restaurantFilterBottomSheetDateEditText
         val datePickerDialogListener =
             DatePickerDialog.OnDateSetListener { view, year, month, day ->
-                dateEditTextCalendar.set(year, month, day)
+                viewModel.setDateEditTextCalendar(year, month, day)
                 updateDateEditText()
 
                 // Also Update ViewModel CurrentDate
-                viewModel.updateCurrentDate(Utility.toLocalDate(dateEditTextCalendar))
+                viewModel.updateCurrentDate(Utility.toLocalDate(viewModel.dateEditTextCalendar))
             }
         restaurantFilterBottomSheetDateEditText.setOnClickListener { it ->
             // Show Date Picker Dialog Upon Edit Text Click
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 datePickerDialogListener,
-                dateEditTextCalendar.get(Calendar.YEAR),
-                dateEditTextCalendar.get(Calendar.MONTH),
-                dateEditTextCalendar.get(Calendar.DAY_OF_MONTH)
+                viewModel.dateEditTextCalendar.get(Calendar.YEAR),
+                viewModel.dateEditTextCalendar.get(Calendar.MONTH),
+                viewModel.dateEditTextCalendar.get(Calendar.DAY_OF_MONTH)
             )
             // Only allow selecting Today's Date onwards
             val datePicker = datePickerDialog.datePicker
             datePicker.minDate = System.currentTimeMillis()
             datePickerDialog.show()
         }
-        // Update Date Edit Text Once to set Text as current Date
+        // Update Date Edit Text Once to sync latest value from viewModel
         updateDateEditText()
     }
 
     private fun updateDateEditText() {
         // Update Date Edit Text Content to current value of dateEditTextCalendar
-        restaurantFilterBottomSheetDateEditText.setText(dateFormat.format(dateEditTextCalendar.time))
+        restaurantFilterBottomSheetDateEditText.setText(viewModel.getEditTextCalendarFormattedDate())
     }
 
     private fun initializeTimeEditText() {
         // Initialize Time Edit Text to Show Time Picker Dialog Upon Click
         restaurantFilterBottomSheetTimeEditText = binding.restaurantFilterBottomSheetTimeEditText
         val timePickerDialogListener = TimePickerDialog.OnTimeSetListener { view, hour, minute ->
-            timeEditTextTime = timeEditTextTime.withHour(hour).withMinute(minute)
+            viewModel.setTimeEditTextTime(hour, minute)
             updateTimeEditText()
 
             // Also Update ViewModel CurrentTimeslot
-            viewModel.updateCurrentTimeslot(Utility.getTimeslot(timeEditTextTime))
+            viewModel.updateCurrentTimeslot(Utility.getTimeslot(viewModel.timeEditTextTime))
         }
         restaurantFilterBottomSheetTimeEditText.setOnClickListener { it ->
             // Show Time Picker Dialog Upon Edit Text Click
             TimePickerDialog(
                 requireContext(),
                 timePickerDialogListener,
-                timeEditTextTime.hour,
-                timeEditTextTime.minute,
+                viewModel.timeEditTextTime.hour,
+                viewModel.timeEditTextTime.minute,
                 true
             ).show()
         }
-        // Update Time Edit Text Once to set Text as current Time
+        // Update Time Edit Text Once to sync latest value from viewModel
         updateTimeEditText()
     }
 
     private fun updateTimeEditText() {
-        // Prepend with 0 if either hour or minute consist only of single digit
-        val hour =
-            if (timeEditTextTime.hour >= 10) "${timeEditTextTime.hour}" else "0${timeEditTextTime.hour}"
-        val minute =
-            if (timeEditTextTime.minute >= 10) "${timeEditTextTime.minute}" else "0${timeEditTextTime.minute}"
         // Update Time Edit Text Content to current value of timeEditTextTime
-        restaurantFilterBottomSheetTimeEditText.setText("$hour:$minute")
+        restaurantFilterBottomSheetTimeEditText.setText(viewModel.getTimeEditTextTimeFormattedTime())
     }
 
     private fun expandBottomSheet() {

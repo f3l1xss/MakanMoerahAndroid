@@ -13,8 +13,10 @@ import com.felixstanley.makanmoerahandroid.entity.restaurant.Restaurant
 import com.felixstanley.makanmoerahandroid.network.service.RestaurantService
 import com.felixstanley.makanmoerahandroid.utility.Utility
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalTime
+import java.util.*
 
 class ExploreViewModel(private val restaurantService: RestaurantService) : ViewModel() {
 
@@ -36,6 +38,15 @@ class ExploreViewModel(private val restaurantService: RestaurantService) : ViewM
     private var currentRating = Range(Constants.NULL_REPRESENTATION, Constants.NULL_REPRESENTATION)
     private var currentIncludeRemainingTimeslot = true
     private var currentPageNum = 1
+
+    // Stores Latest Value of Date selected via Date Edit Text
+    // Will correspond to value of currentDate
+    val dateEditTextCalendar = Calendar.getInstance()
+    private val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+
+    // Stores Latest Value of Time selected via Time Edit Text
+    // Will correspond to value of currentTimeslot
+    var timeEditTextTime = LocalTime.now()
 
     // Available (Rendered) City Id, City, District, Food Category Filters Value
     private val _cityIdFilters = MutableLiveData<List<Int>>()
@@ -62,6 +73,16 @@ class ExploreViewModel(private val restaurantService: RestaurantService) : ViewM
     // Boolean Flag to keep state whether restaurantRefresh is due to infiniteScroll
     private var refreshTriggeredByInfiniteScroll = false
 
+    // Boolean Flag to Inform Fragment that District Filters has just been reset
+    private val _districtFiltersReset = MutableLiveData<Boolean>()
+    val districtFiltersReset: LiveData<Boolean>
+        get() = _districtFiltersReset
+
+    // Boolean Flag to Inform Fragment that Food Category Filters has just been reset
+    private val _foodCategoriesFiltersReset = MutableLiveData<Boolean>()
+    val foodCategoriesFiltersReset: LiveData<Boolean>
+        get() = _foodCategoriesFiltersReset
+
     init {
         getRestaurantCurrentCriteria()
 
@@ -81,6 +102,50 @@ class ExploreViewModel(private val restaurantService: RestaurantService) : ViewM
                 getRestaurantCurrentCriteria()
             }
         }
+    }
+
+    fun setDateEditTextCalendar(year: Int, month: Int, day: Int) {
+        dateEditTextCalendar.set(year, month, day)
+    }
+
+    fun getEditTextCalendarFormattedDate(): String {
+        return dateFormat.format(dateEditTextCalendar.time)
+    }
+
+    fun setTimeEditTextTime(hour: Int, minute: Int) {
+        timeEditTextTime = timeEditTextTime.withHour(hour).withMinute(minute)
+    }
+
+    fun getTimeEditTextTimeFormattedTime(): String {
+        // Prepend with 0 if either hour or minute consist only of single digit
+        val hour =
+            if (timeEditTextTime.hour >= 10) "${timeEditTextTime.hour}" else "0${timeEditTextTime.hour}"
+        val minute =
+            if (timeEditTextTime.minute >= 10) "${timeEditTextTime.minute}" else "0${timeEditTextTime.minute}"
+        // Update Time Edit Text Content to current value of timeEditTextTime
+        return "$hour:$minute"
+    }
+
+    // Return Value of Current City Name Based on Current City Id
+    fun getCurrentCityName(): String {
+        // Perform a reverse mapping from cityId to cityName if currentCityId is not -1
+        // (meaning that currentCityId has been populated before screen rotation)
+        // Otherwise, return an empty string
+        if (currentCityId == Constants.NULL_REPRESENTATION) {
+            return ""
+        }
+        val cityNameIndex = _cityIdFilters.value?.indexOf(currentCityId)!!
+        return _cityFilters.value?.get(cityNameIndex)!!
+    }
+
+    // Return Value of Current District Filters
+    fun getCurrentDistricts(): List<String> {
+        return currentDistricts.toList()
+    }
+
+    // Return Value of Current Food Categories Filters
+    fun getCurrentFoodCategories(): List<String> {
+        return currentFoodCategories.toList()
     }
 
     fun isRefreshTriggeredByInfiniteScroll(): Boolean {
@@ -163,6 +228,13 @@ class ExploreViewModel(private val restaurantService: RestaurantService) : ViewM
             currentDistricts.add(value)
         } else {
             val index = currentDistricts.indexOf(value)
+
+            // Unchecked Event might be triggered by recyclerView during reset scenario,
+            // This will cause item not to be found
+            // Ignore this event
+            if (index == -1) {
+                return
+            }
             currentDistricts.removeAt(index)
         }
 
@@ -177,6 +249,13 @@ class ExploreViewModel(private val restaurantService: RestaurantService) : ViewM
             currentFoodCategories.add(value)
         } else {
             val index = currentFoodCategories.indexOf(value)
+
+            // Unchecked Event might be triggered by recyclerView during reset scenario,
+            // This will cause item not to be found
+            // Ignore this event
+            if (index == -1) {
+                return
+            }
             currentFoodCategories.removeAt(index)
         }
 
@@ -206,11 +285,25 @@ class ExploreViewModel(private val restaurantService: RestaurantService) : ViewM
     private fun resetDistrictFilters() {
         currentDistricts = mutableListOf("")
         getFilters(RestaurantFilter.DISTRICT)
+
+        // Also Trigger Reset Flag
+        _districtFiltersReset.value = true
+    }
+
+    fun resetDistrictFiltersResetFlag() {
+        _districtFiltersReset.value = false
     }
 
     private fun resetFoodCategoriesFilter() {
         currentFoodCategories = mutableListOf("")
         getFilters(RestaurantFilter.FOOD_CATEGORY)
+
+        // Also Trigger Reset Flag
+        _foodCategoriesFiltersReset.value = true
+    }
+
+    fun resetFoodCategoriesResetFlag() {
+        _foodCategoriesFiltersReset.value = false
     }
 
     private fun getRestaurantCurrentCriteria() {
