@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.RadioGroup
-import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -293,8 +292,10 @@ class ExploreFragment : AbstractFragment() {
         val restaurantFilterBottomSheetNumOfPeopleTextView =
             binding.restaurantFilterBottomSheetNumOfPeopleTextView
         restaurantFilterBottomSheetNumOfPeopleTextView.setAdapter(numberOfPeopleItemAdapter)
-        // Set Default Text
-        restaurantFilterBottomSheetNumOfPeopleTextView.setText("2", false)
+        // Set Text From ViewModel
+        restaurantFilterBottomSheetNumOfPeopleTextView.setText(
+            viewModel.getCurrentNumOfPeople().toString(), false
+        )
         // Add NumOfPeople Exposed Dropdown AfterTextChange Listener
         restaurantFilterBottomSheetNumOfPeopleTextView.doAfterTextChanged { text: Editable? ->
             // Update ViewModel current numOfPeople

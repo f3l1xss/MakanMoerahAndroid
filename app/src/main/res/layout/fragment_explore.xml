@@ -190,7 +190,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/explore_fragment_bottom_sheet_filter_num_of_people_dropdown_hint">
 
-                        <AutoCompleteTextView
+                        <com.felixstanley.makanmoerahandroid.fragment.explore.ExposedDropdownMenu
                             android:id="@+id/restaurant_filter_bottom_sheet_num_of_people_text_view"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

@@ -148,6 +148,10 @@ class ExploreViewModel(private val restaurantService: RestaurantService) : ViewM
         return currentFoodCategories.toList()
     }
 
+    fun getCurrentNumOfPeople(): Short {
+        return currentNumOfPeople;
+    }
+
     fun isRefreshTriggeredByInfiniteScroll(): Boolean {
         return refreshTriggeredByInfiniteScroll
     }
