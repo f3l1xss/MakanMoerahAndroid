@@ -1,8 +1,11 @@
 package com.felixstanley.makanmoerahandroid.network.interceptor
 
+import android.content.Context
+import com.felixstanley.makanmoerahandroid.MainActivity
 import com.felixstanley.makanmoerahandroid.MainApplication
 import com.felixstanley.makanmoerahandroid.constants.Constants
 import com.felixstanley.makanmoerahandroid.network.api.NetworkApi
+import com.felixstanley.makanmoerahandroid.utility.Utility
 import com.google.android.gms.safetynet.SafetyNet
 import com.google.android.gms.tasks.Tasks
 import kotlinx.coroutines.runBlocking
@@ -23,12 +26,14 @@ private const val SESSION_EXPIRED_URL = "/login?sessionExpired=true"
 
 class ReloginInterceptor : Interceptor {
 
+    private val sharedPreferences = MainActivity.getInstance().getPreferences(Context.MODE_PRIVATE)
+
     override fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.proceed(chain.request())
-        if (response.isSuccessful && response.header(LOCATION_HEADER_NAME)
-                .equals(SESSION_EXPIRED_URL)
+        if (Utility.credentialsExistAtSharedPreferences(sharedPreferences) && response.isSuccessful
+            && response.header(LOCATION_HEADER_NAME).equals(SESSION_EXPIRED_URL)
         ) {
-            // Expired Session, User has to relogin
+            // Expired Session & Credentials Exist at Shared Preferences, User has to relogin
             try {
                 relogin()
             } catch (e: Exception) {
@@ -50,11 +55,16 @@ class ReloginInterceptor : Interceptor {
 
         if (response.isSuccessful && !response.result.tokenResult.isNullOrBlank()) {
             runBlocking {
-                // TODO: Get Login Credential from safe space
+                val email = sharedPreferences.getString(
+                    Constants.SHARED_PREFERENCES_LOGIN_EMAIL_KEY,
+                    null
+                )!!
+                val password = sharedPreferences.getString(
+                    Constants.SHARED_PREFERENCES_LOGIN_PASSWORD_KEY,
+                    null
+                )!!
                 NetworkApi.userService.login(
-                    "f3l1xss@gmail.com",
-                    "2vZGq5BZVc",
-                    response.result.tokenResult
+                    email, password, response.result.tokenResult
                 )
             }
         }

@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.AccountFragment">
+    tools:context=".fragment.account.AccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <variable
+            name="accountViewModel"
+            type="com.felixstanley.makanmoerahandroid.fragment.account.AccountViewModel" />
+
+        <variable
+            name="loggedInUser"
+            type="com.felixstanley.makanmoerahandroid.entity.user.LoggedInUser" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Account" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/logged_in_user_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{loggedInUser.email}"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <!-- Logout Button -->
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:onClick="@{() -> accountViewModel.onLogoutButtonClicked()}"
+            android:text="logout"
+            android:textColor="@color/primaryColor"
+            android:textSize="17sp"
+            app:backgroundTint="@color/lightBlue" />
+    </LinearLayout>
+</layout>

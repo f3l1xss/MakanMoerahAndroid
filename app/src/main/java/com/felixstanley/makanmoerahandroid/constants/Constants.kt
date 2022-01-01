@@ -36,4 +36,9 @@ object Constants {
         "19",
         "20"
     )
+
+    // Shared Preferences Key
+    const val SHARED_PREFERENCES_LOGIN_EMAIL_KEY = "loginEmail"
+    const val SHARED_PREFERENCES_LOGIN_PASSWORD_KEY = "loginPassword"
+
 }

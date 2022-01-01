@@ -9,5 +9,5 @@ data class LoggedInUser(
     val status: Status,
     val rejectReason: String,
     val authorities: List<GrantedAuthority>,
-    val idNum: String
+    val idNum: String?
 )

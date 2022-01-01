@@ -1,8 +1,8 @@
 package com.felixstanley.makanmoerahandroid.network.service
 
 import com.felixstanley.makanmoerahandroid.entity.user.ChangePasswordUser
-import com.felixstanley.makanmoerahandroid.entity.user.LoggedInUser
 import com.felixstanley.makanmoerahandroid.entity.user.NewUser
+import okhttp3.ResponseBody
 import retrofit2.http.*
 import java.io.File
 
@@ -17,10 +17,15 @@ interface UserService {
         @Field("password") password: String,
         @Field("recaptchaToken") recaptchaToken: String,
         @Field("isFromAndroid") isFromAndroid: Boolean = true
-    )
+    ): Boolean
 
+    @POST("$BASE_URL/logout")
+    suspend fun logout()
+
+    // Need to return ResponseBody to allow null Value
+    // https://github.com/square/retrofit/issues/1554
     @GET(BASE_URL)
-    suspend fun getLoggedInUser(): LoggedInUser
+    suspend fun getLoggedInUser(): ResponseBody
 
     @GET("$BASE_URL/isEmailExist")
     suspend fun isEmailExist(

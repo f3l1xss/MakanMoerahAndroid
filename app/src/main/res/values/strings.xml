@@ -34,4 +34,21 @@
     <string name="explore_fragment_bottom_sheet_filter_rating_header_text">Rating</string>
     <string name="explore_fragment_bottom_sheet_filter_rating_slider_content_description">Rating Slider</string>
     <string name="explore_fragment_bottom_sheet_filter_apply_filter_button_text">Apply Filter</string>
+
+    <!-- Login Fragment -->
+    <string name="login_fragment_login_header_text">Log in</string>
+    <string name="login_fragment_email_input_text_hint">Email</string>
+    <string name="login_fragment_empty_email_error_message">Required</string>
+    <string name="login_fragment_invalid_email_error_message">Invalid Email Format</string>
+    <string name="login_fragment_password_input_text_hint">Password</string>
+    <string name="login_fragment_empty_password_error_message">Required</string>
+    <string name="login_fragment_login_button_text">Login</string>
+    <string name="login_fragment_login_failure_invalid_credentials_error_message">Invalid Credentials</string>
+    <string name="login_fragment_login_failure_failed_recaptcha_error_message">Invalid Recaptcha, Please try login again</string>
+    <string name="login_fragment_login_failure_empty_recaptcha_response_error_message">Empty Recaptcha Response, Please try login again</string>
+
+    <!-- Account Fragment -->
+    <string name="account_fragment_logout_failure_general_exception_error_message">Logout Fails, Please try again</string>
+    <string name="account_fragment_relogin_failure_general_exception_error_message">Relogin Fails, Please check your internet connection</string>
+
 </resources>

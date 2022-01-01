@@ -22,4 +22,11 @@ object CookieJarImpl : CookieJar {
         return cookies
     }
 
+    fun clearCookies() {
+        // Clear All Saved Cookies (Called upon logout so that subsequent requests are not treated as session expired request)
+        // Need to perform this explicitly as we do not consider setting expired cookie as deleting that cookie
+        // similar to browser behavior
+        cookies.clear()
+    }
+
 }

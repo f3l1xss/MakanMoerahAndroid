@@ -20,7 +20,7 @@ object Configuration {
         .addInterceptor(CsrfTokenHeaderInterceptor())
         .addInterceptor(ReloginInterceptor())
         .cookieJar(CookieJarImpl).build()
-    private val moshi = Moshi.Builder()
+    val moshi = Moshi.Builder()
         .addLast(KotlinJsonAdapterFactory())
         .build()
 

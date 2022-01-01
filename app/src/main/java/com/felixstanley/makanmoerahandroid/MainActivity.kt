@@ -7,7 +7,16 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        private lateinit var instance: MainActivity
+
+        fun getInstance(): MainActivity {
+            return instance
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        instance = this
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
