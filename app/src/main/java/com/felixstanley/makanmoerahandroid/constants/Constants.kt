@@ -41,4 +41,7 @@ object Constants {
     const val SHARED_PREFERENCES_LOGIN_EMAIL_KEY = "loginEmail"
     const val SHARED_PREFERENCES_LOGIN_PASSWORD_KEY = "loginPassword"
 
+    // Room Database
+    const val COOKIE_DATABASE_NAME = "cookie_database"
+
 }

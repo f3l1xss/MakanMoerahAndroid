@@ -80,4 +80,9 @@ dependencies {
     // Google Flexbox
     // Uncomment to use Flex wrap needed at explore fragment sort filter
     //implementation "com.google.android.flexbox:flexbox:$version_flexbox"
+
+    // Room (Database)
+    implementation "androidx.room:room-runtime:$version_room"
+    implementation "androidx.room:room-ktx:$version_room"
+    kapt "androidx.room:room-compiler:$version_room"
 }

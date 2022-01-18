@@ -53,8 +53,9 @@ class AccountViewModel(
             val responseBody = userService.getLoggedInUser()
             val responseContent = responseBody.string()
             if (responseContent.isNullOrBlank()) {
-                // Indicates that Backend API return null (session has expired and that User needs to be relogged In using
-                // credentials at Shared Preferences)
+                // Indicates that Backend API return null (session is gone for some reason
+                // (should not happen as User with Expired Session will be relogged in with reloginInterceptor))
+                // and that User needs to be relogged In using credentials at Shared Preferences)
                 relogin()
             } else {
                 // Indicates that valid LoggedInUser Instance is returned, parse the responseBody to LoggedInUser POJO
