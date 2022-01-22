@@ -17,9 +17,9 @@ data class Booking(
     val numOfPeople: Short,
     val bookingStatus: Short,
     val cancelledBySystem: Boolean,
-    val confirmAttendanceCode: String,
+    val confirmAttendanceCode: String?,
     val discountDetailsId: Int,
     val minimumSpends: List<RestaurantMinimumSpend>,
     val maxDiscount: Int,
-    val review: ReviewElastic,
+    val review: ReviewElastic?,
 )

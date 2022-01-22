@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_explore" />
     <fragment
         android:id="@+id/bookingFragment"
-        android:name="com.felixstanley.makanmoerahandroid.fragment.BookingFragment"
+        android:name="com.felixstanley.makanmoerahandroid.fragment.booking.BookingFragment"
         android:label="fragment_booking"
         tools:layout="@layout/fragment_booking" />
     <fragment

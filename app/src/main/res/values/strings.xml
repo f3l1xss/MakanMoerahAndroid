@@ -47,6 +47,13 @@
     <string name="login_fragment_login_failure_failed_recaptcha_error_message">Invalid Recaptcha, Please try login again</string>
     <string name="login_fragment_login_failure_empty_recaptcha_response_error_message">Empty Recaptcha Response, Please try login again</string>
 
+    <!-- Booking Fragment -->
+    <string name="booking_fragment_booking_category_ongoing_toggle_button_text">Ongoing</string>
+    <string name="booking_fragment_booking_category_cancelled_toggle_button_text">Cancelled</string>
+    <string name="booking_fragment_booking_category_completed_toggle_button_text">Completed</string>
+    <string name="booking_fragment_booking_list_no_booking_available_header_text">No Booking(s) Yet</string>
+    <string name="booking_fragment_booking_list_restaurant_card_image_content_description">Restaurant Image</string>
+
     <!-- Account Fragment -->
     <string name="account_fragment_logout_failure_general_exception_error_message">Logout Fails, Please try again</string>
     <string name="account_fragment_relogin_failure_general_exception_error_message">Relogin Fails, Please check your internet connection</string>
