@@ -9,7 +9,7 @@ data class Booking(
     val usersId: String,
     val usersName: String,
     val usersEmail: String,
-    val restaurant: Restaurant,
+    val restaurant: Restaurant?,
     val confirmedDate: String,
     val timeslotLocalTime: String,
     val bookingTime: String,

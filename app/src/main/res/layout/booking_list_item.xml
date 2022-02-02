@@ -168,23 +168,25 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <com.google.android.material.chip.Chip
                         android:id="@+id/booking_list_item_booking_status"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@{String.valueOf(booking.bookingStatus)}"
+                        android:enabled="false"
+                        android:textColor="@color/primaryColor"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:bookingStatus="@{booking}" />
 
                     <TextView
                         android:id="@+id/booking_list_item_booking_num_of_people"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@{String.valueOf(booking.numOfPeople)}"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:numOfPeople="@{booking.numOfPeople}" />
 
                 </LinearLayout>
             </LinearLayout>

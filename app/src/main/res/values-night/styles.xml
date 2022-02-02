@@ -1,5 +1,11 @@
 <resources>
 
+    <!-- Booking Status Button Toggle Group Style -->
+    <style name="bookingStatusButtonToggleGroupStyle" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/booking_status_button_toggle_group_text_color</item>
+        <item name="strokeColor">@color/booking_status_button_toggle_group_stroke_color</item>
+    </style>
+
     <style name="priceRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/price_rating_bar</item>
         <item name="android:minHeight">48dp</item>

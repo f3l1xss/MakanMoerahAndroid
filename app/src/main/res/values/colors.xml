@@ -13,5 +13,8 @@
     <color name="darkBlue">#82b3c9</color>
     <color name="transparentBlue">#d8e0f3</color>
     <color name="black">#000000</color>
+    <color name="success">#28a745</color>
+    <color name="warning">#ffc107</color>
+    <color name="danger">#dc3545</color>
 
 </resources>

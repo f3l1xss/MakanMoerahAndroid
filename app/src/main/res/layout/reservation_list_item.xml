@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="booking"
+            type="com.felixstanley.makanmoerahandroid.entity.booking.Booking" />
+    </data>
+
+    <!-- Each Reservation List Item Card Height will be adjusted by RecyclerViewAdapter
+    to match 40% Parent's Height -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/reservation_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--Card will contain 2 Parts, Top / Bottom, arranged vertically, split 40%, 60% width -->
+
+            <!-- Top Part -->
+            <!-- Top Part Height will be adjusted by RecyclerViewAdapter
+                to match 40% ListItem Height -->
+            <LinearLayout
+                android:id="@+id/reservation_list_item_top_part"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/reservation_list_item_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{booking.usersName}"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/reservation_list_item_user_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{booking.usersEmail}"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- Bottom Part -->
+            <!-- Bottom Part Height will be adjusted by RecyclerViewAdapter
+            to match 60% ListItem Height -->
+            <LinearLayout
+                android:id="@+id/reservation_list_item_bottom_part"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- Booking Confirmed Date & Timeslot -->
+                <!-- Booking Confirmed Date & Timeslot Height will be adjusted by RecyclerViewAdapter
+              to match 30% Bottom Part Height -->
+                <TextView
+                    android:id="@+id/reservation_list_item_confirmed_date_timeslot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{booking.confirmedDate + ' ' + booking.timeslotLocalTime}"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Booking Details Tab -->
+                <!-- Booking Details Tab Height will be adjusted by RecyclerViewAdapter
+         to match 70% Middle Part Height -->
+                <LinearLayout
+                    android:id="@+id/reservation_list_item_booking_details_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reservation_list_item_booking_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{booking.bookingCode}"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/reservation_list_item_booking_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:textColor="@color/primaryColor"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:bookingStatus="@{booking}" />
+
+                    <TextView
+                        android:id="@+id/reservation_list_item_booking_num_of_people"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:numOfPeople="@{booking.numOfPeople}" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

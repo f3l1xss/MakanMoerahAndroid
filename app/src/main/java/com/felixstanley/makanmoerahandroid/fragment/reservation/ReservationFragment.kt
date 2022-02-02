@@ -1,57 +1,65 @@
-package com.felixstanley.makanmoerahandroid.fragment.booking
+package com.felixstanley.makanmoerahandroid.fragment.reservation
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.felixstanley.makanmoerahandroid.R
-import com.felixstanley.makanmoerahandroid.databinding.FragmentBookingBinding
+import com.felixstanley.makanmoerahandroid.databinding.FragmentReservationBinding
 import com.felixstanley.makanmoerahandroid.entity.enums.BookingStatus
 import com.felixstanley.makanmoerahandroid.fragment.AbstractFragment
+import com.felixstanley.makanmoerahandroid.fragment.booking.BookingListItemAdapter
 import com.felixstanley.makanmoerahandroid.network.api.NetworkApi
+import com.felixstanley.makanmoerahandroid.utility.Utility
 import com.google.android.material.button.MaterialButtonToggleGroup
+import java.util.*
 
-class BookingFragment : AbstractFragment() {
+class ReservationFragment : AbstractFragment() {
 
-    private lateinit var binding: FragmentBookingBinding
-    private lateinit var viewModel: BookingViewModel
-    private lateinit var viewModelFactory: BookingViewModelFactory
+    private lateinit var binding: FragmentReservationBinding
+    private lateinit var viewModel: ReservationViewModel
+    private lateinit var viewModelFactory: ReservationViewModelFactory
+
+    private lateinit var datePickerEditText: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate Booking Fragment
-        binding = FragmentBookingBinding.inflate(inflater)
+        // Inflate Reservation Fragment
+        binding = FragmentReservationBinding.inflate(inflater)
 
         // Initialize ViewModelFactory & ViewModel
-        viewModelFactory = BookingViewModelFactory(NetworkApi.bookingService)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(BookingViewModel::class.java)
+        viewModelFactory = ReservationViewModelFactory(NetworkApi.bookingService)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ReservationViewModel::class.java)
 
         // Initialize Data Binding Variables
         binding.lifecycleOwner = this
-        binding.bookingViewModel = viewModel
+        binding.reservationViewModel = viewModel
 
-        initializeBookingListRecyclerView()
+        initializeReservationListRecyclerView()
         initializeBookingCategoryToggleButtonGroup()
+        initializeDateEditText()
 
         return binding.root
     }
 
-    private fun initializeBookingListRecyclerView() {
+    private fun initializeReservationListRecyclerView() {
         val manager = GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)
         val adapter = BookingListItemAdapter()
 
-        binding.bookingList.adapter = adapter
-        binding.bookingList.layoutManager = manager
+        binding.reservationList.adapter = adapter
+        binding.reservationList.layoutManager = manager
 
         // Initialize RecyclerView OnScrollListener
         // to implement endless / infinite scrolling
         var loading = false
-        binding.bookingList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.reservationList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 // Reached Bottom Of List, Fetch New Set of Items if Available
                 if (!loading && !recyclerView.canScrollVertically(1)) {
@@ -71,9 +79,9 @@ class BookingFragment : AbstractFragment() {
                 val oldList = adapter.currentList.toList().map { it.booking!! }.toMutableList()
                 // Append New Bookings to oldList
                 oldList.addAll(it.entities)
-                adapter.addList(oldList, true)
+                adapter.addList(oldList, false)
             } else {
-                adapter.addList(it.entities, true)
+                adapter.addList(it.entities, false)
             }
 
             // New Data Set is ready, Set Loading Flag to false
@@ -98,6 +106,37 @@ class BookingFragment : AbstractFragment() {
                 viewModel.updateCurrentBookingCategory(selectedBookingCategory)
             }
         }
+    }
+
+    private fun initializeDateEditText() {
+        // Initialize Date Edit Text to show Date Picker Dialog Upon Click
+        datePickerEditText = binding.datePickerEditText
+        val datePickerDialogListener =
+            DatePickerDialog.OnDateSetListener { view, year, month, day ->
+                viewModel.setDateEditTextCalendar(year, month, day)
+                updateDateEditText()
+
+                // Also Update ViewModel CurrentDate
+                viewModel.updateCurrentDate(Utility.toLocalDate(viewModel.dateEditTextCalendar))
+            }
+        datePickerEditText.setOnClickListener { it ->
+            // Show Date Picker Dialog Upon Edit Text Click
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                datePickerDialogListener,
+                viewModel.dateEditTextCalendar.get(Calendar.YEAR),
+                viewModel.dateEditTextCalendar.get(Calendar.MONTH),
+                viewModel.dateEditTextCalendar.get(Calendar.DAY_OF_MONTH)
+            )
+            datePickerDialog.show()
+        }
+        // Update Date Edit Text Once to sync latest value from viewModel
+        updateDateEditText()
+    }
+
+    private fun updateDateEditText() {
+        // Update Date Edit Text Content to current value of dateEditTextCalendar
+        datePickerEditText.setText(viewModel.getEditTextCalendarFormattedDate())
     }
 
 }
