@@ -32,4 +32,9 @@
         <item name="android:colorAccent">@color/lightBlue</item>
     </style>
 
+    <!-- App Bar / Action Bar Customization -->
+    <style name="actionBarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/black</item>
+    </style>
+
 </resources>

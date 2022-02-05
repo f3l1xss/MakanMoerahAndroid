@@ -1,8 +1,10 @@
 package com.felixstanley.makanmoerahandroid.fragment.explore
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -115,6 +117,16 @@ class RestaurantListItemAdapter :
 
         fun bind(restaurant: Restaurant) {
             binding.restaurant = restaurant
+
+            // Set RestaurantListItem OnClickListener To Navigate to Restaurant Details Fragment
+            binding.restaurantListItem.setOnClickListener { view: View ->
+                view.findNavController()
+                    .navigate(
+                        ExploreFragmentDirections.actionExploreFragmentToRestaurantDetailsFragment(
+                            restaurant.id
+                        )
+                    )
+            }
             binding.executePendingBindings()
         }
     }

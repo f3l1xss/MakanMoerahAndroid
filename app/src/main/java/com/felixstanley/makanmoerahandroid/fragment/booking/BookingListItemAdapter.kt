@@ -1,8 +1,10 @@
 package com.felixstanley.makanmoerahandroid.fragment.booking
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -151,6 +153,17 @@ class BookingListItemAdapter : ListAdapter<BookingListItemDataItem, RecyclerView
 
         fun bind(booking: Booking) {
             binding.booking = booking
+
+            // Set BookingListItem OnClickListener To Navigate to Restaurant Details Fragment
+            binding.bookingListItem.setOnClickListener { view: View ->
+                view.findNavController()
+                    .navigate(
+                        BookingFragmentDirections.actionBookingFragmentToRestaurantDetailsFragment(
+                            booking.restaurant!!.id
+                        )
+                    )
+
+            }
             binding.executePendingBindings()
         }
 

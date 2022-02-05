@@ -16,5 +16,8 @@
         <!-- Date Picker Dialog -->
         <item name="android:datePickerDialogTheme">@style/pickerDialogTheme</item>
         <item name="android:timePickerDialogTheme">@style/pickerDialogTheme</item>
+
+        <!-- App Bar / Action Bar Customization -->
+        <item name="actionBarTheme">@style/actionBarTheme</item>
     </style>
 </resources>

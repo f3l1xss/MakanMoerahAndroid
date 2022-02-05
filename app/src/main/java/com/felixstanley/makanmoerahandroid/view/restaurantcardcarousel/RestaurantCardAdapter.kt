@@ -1,12 +1,15 @@
 package com.felixstanley.makanmoerahandroid.view.restaurantcardcarousel
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.felixstanley.makanmoerahandroid.databinding.RestaurantCardBinding
 import com.felixstanley.makanmoerahandroid.entity.restaurant.Restaurant
+import com.felixstanley.makanmoerahandroid.fragment.home.HomeFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -53,6 +56,16 @@ class RestaurantCardAdapter :
 
         fun bind(restaurant: Restaurant) {
             binding.restaurant = restaurant
+
+            // Set RestaurantCard OnClickListener To Navigate to Restaurant Details Fragment
+            binding.restaurantCard.setOnClickListener { view: View ->
+                view.findNavController()
+                    .navigate(
+                        HomeFragmentDirections.actionHomeFragmentToRestaurantDetailsFragment(
+                            restaurant.id
+                        )
+                    )
+            }
             binding.executePendingBindings()
         }
     }
