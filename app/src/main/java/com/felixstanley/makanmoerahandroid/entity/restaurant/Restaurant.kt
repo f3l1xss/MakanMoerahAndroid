@@ -11,6 +11,7 @@ data class Restaurant(
     val city: String,
     val district: String,
     val coordinate: GeoPoint,
+    val restaurantHours: List<RestaurantHours>?,
     val restaurantHolidayHours: List<RestaurantHolidayHours>?,
     val restaurantImages: List<RestaurantImage>,
     val menus: List<Menu>?,

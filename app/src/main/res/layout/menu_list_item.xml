@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="menu"
+            type="com.felixstanley.makanmoerahandroid.entity.restaurant.Menu" />
+    </data>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/menu_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@{menu.name}" />
+
+        <TextView
+            android:id="@+id/menu_before_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@{String.valueOf(menu.price)}" />
+
+        <!--TODO: Implement After Price Logic -->
+        <TextView
+            android:id="@+id/menu_after_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(menu.price)}" />
+    </TableRow>
+</layout>

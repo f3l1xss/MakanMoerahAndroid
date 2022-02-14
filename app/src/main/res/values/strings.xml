@@ -65,4 +65,16 @@
     <string name="account_fragment_logout_failure_general_exception_error_message">Logout Fails, Please try again</string>
     <string name="account_fragment_relogin_failure_general_exception_error_message">Relogin Fails, Please check your internet connection</string>
 
+    <!-- Restaurant Details Fragment -->
+    <string name="restaurant_details_fragment_facility_header_text">Facilities</string>
+    <string name="restaurant_details_fragment_payment_mode_header_text">Payment Modes</string>
+    <string name="restaurant_details_fragment_opening_hour_table_phone_header_text">Phone</string>
+    <string name="restaurant_details_fragment_opening_hour_table_opening_hour_header_text">Opening Hour</string>
+    <string name="restaurant_details_fragment_opening_hour_table_closing_hour_header_text">Closing Hour</string>
+    <string name="restaurant_details_fragment_discount_table_before_header_text">Before</string>
+    <string name="restaurant_details_fragment_discount_table_after_header_text">After</string>
+    <string name="restaurant_details_fragment_reviews_header_text">Reviews</string>
+    <string name="restaurant_details_fragment_number_of_reviews_text">review(s)</string>
+    <string name="restaurant_details_fragment_review_card_user_avatar_image_content_description">User Image</string>
+
 </resources>

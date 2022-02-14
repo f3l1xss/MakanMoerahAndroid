@@ -1,6 +1,8 @@
 package com.felixstanley.makanmoerahandroid.entity.paymentmode
 
+import com.felixstanley.makanmoerahandroid.entity.facility.AbstractFacilityPaymentMode
+
 data class PaymentMode(
-    val name: String,
-    val iconClass: String
-)
+    override val name: String,
+    override val iconClass: String
+) : AbstractFacilityPaymentMode()

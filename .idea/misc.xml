@@ -19,6 +19,7 @@
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/activity_main.xml" value="0.19444444444444445" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/booking_list_item.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/checkbox.xml" value="0.15208333333333332" />
+        <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/facility_list_item.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/fragment_account.xml" value="0.1265625" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/fragment_account2.xml" value="0.10572916666666667" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/fragment_booking.xml" value="0.1" />
@@ -26,17 +27,20 @@
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/fragment_home.xml" value="0.1265625" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/fragment_reservation.xml" value="0.1265625" />
+        <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/menu_list_item.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/no_booking_available_header.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/no_district_filter_available_header.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/no_food_category_filter_available_header.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/no_reservation_available_header.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/no_restaurant_found_header.xml" value="0.2" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/num_of_people_list_item.xml" value="0.184375" />
+        <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/opening_hour_list_item.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/radio_button.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/reservation_list_item.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/restaurant_card.xml" value="0.36" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/restaurant_card_carousel.xml" value="0.2" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/restaurant_list_item.xml" value="0.1" />
+        <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/review_list_item.xml" value="0.1" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/layout/sample_restaurant_card_carousel.xml" value="0.2" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.11927083333333334" />
         <entry key="..\:/Users/f3l1x/Development/MakanMoerahAndroid/app/src/main/res/menu/explore_fragment_options_menu.xml" value="0.1" />
