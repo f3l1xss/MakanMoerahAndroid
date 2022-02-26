@@ -1,14 +1,21 @@
 package com.felixstanley.makanmoerahandroid.fragment.restaurantdetails
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.LinearLayout
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.felixstanley.makanmoerahandroid.R
+import com.felixstanley.makanmoerahandroid.constants.Constants
 import com.felixstanley.makanmoerahandroid.databinding.FragmentRestaurantDetailsBinding
+import com.felixstanley.makanmoerahandroid.entity.restaurant.RestaurantCapacity
 import com.felixstanley.makanmoerahandroid.fragment.AbstractFragment
+import com.felixstanley.makanmoerahandroid.fragment.explore.ExposedDropdownMenu
 import com.felixstanley.makanmoerahandroid.network.api.NetworkApi
 
 class RestaurantDetailsFragment : AbstractFragment() {
@@ -22,6 +29,8 @@ class RestaurantDetailsFragment : AbstractFragment() {
     private lateinit var hourRecyclerViewAdapter: OpeningHourListItemAdapter
     private lateinit var menuRecyclerViewAdapter: MenuListItemAdapter
     private lateinit var reviewRecyclerViewAdapter: ReviewListItemAdapter
+
+    private lateinit var discountSelectionDropdownMenu: ExposedDropdownMenu
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +59,7 @@ class RestaurantDetailsFragment : AbstractFragment() {
         initializeOpeningHourListRecyclerView()
         initializeMenuListRecyclerView()
         initializeReviewListRecyclerView()
+        initializeDiscountSelectionDropdown()
         initializeRestaurant()
 
         return binding.root
@@ -95,6 +105,12 @@ class RestaurantDetailsFragment : AbstractFragment() {
             val holidayHourNoticeCard = binding.restaurantDetailsCardHolidayHourNoticeCard
             if (it.restaurantHolidayHours != null && it.restaurantHolidayHours.isNotEmpty()) {
                 holidayHourNoticeCard.visibility = View.VISIBLE
+            }
+
+            // Update Discount Table Discount Selection Exposed Dropdown Value
+            if (it.restaurantCapacities != null && it.restaurantCapacities.isNotEmpty()) {
+                // TODO: Determine Current Capacity Selection Through Selection Via Booking Card
+                updateDiscountSelectionDropdownListItems(it.restaurantCapacities[0])
             }
 
             binding.executePendingBindings()
@@ -144,6 +160,54 @@ class RestaurantDetailsFragment : AbstractFragment() {
         binding.reviewList.layoutManager =
             GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)
         reviewRecyclerViewAdapter = adapter
+    }
+
+    private fun initializeDiscountSelectionDropdown() {
+        // Initialize Dropdown Menu with N/A Value
+        val initialDiscountSelectionItemAdapter = ArrayAdapter(
+            requireContext(),
+            R.layout.discount_selection_list_item,
+            Constants.RESTAURANT_DETAILS_FRAGMENT_DISCOUNT_SELECTION_INITIAL_DROPDOWN_ITEMS
+        )
+        discountSelectionDropdownMenu =
+            binding.restaurantDetailsCardDiscountTableDiscountSelectionTextView
+        discountSelectionDropdownMenu.setAdapter(initialDiscountSelectionItemAdapter)
+        discountSelectionDropdownMenu.setText(
+            Constants.RESTAURANT_DETAILS_FRAGMENT_DISCOUNT_SELECTION_INITIAL_DROPDOWN_ITEM_NOT_AVAILABLE,
+            false
+        )
+    }
+
+    private fun updateDiscountSelectionDropdownListItems(restaurantCapacity: RestaurantCapacity) {
+        // Update Discount Selection Item List to restaurantCapacity List of Minimum Spend
+        val discountListItems =
+            restaurantCapacity.restaurantMinimumSpends.map { minimumSpend -> "${minimumSpend.discountAmount}%" }
+        val discountSelectionItemAdapter = ArrayAdapter(
+            requireContext(),
+            R.layout.discount_selection_list_item,
+            discountListItems
+        )
+        discountSelectionDropdownMenu.setAdapter(discountSelectionItemAdapter)
+
+        // Initialize DiscountList Item Selection with first Minimum Spend
+        discountSelectionDropdownMenu.setText(discountListItems[0], false)
+        updateMenuListRecyclerViewCurrentDiscount(substringToPercentage(discountListItems[0]))
+
+        // Update Menu List Item on new Discount Value Change whenever Discount Selection Changes
+        discountSelectionDropdownMenu.doAfterTextChanged { text: Editable? ->
+            updateMenuListRecyclerViewCurrentDiscount(substringToPercentage(text!!))
+        }
+    }
+
+    private fun substringToPercentage(text: CharSequence): Int {
+        // Remove Percentage Symbol from dropdown text
+        val percentageSymbolIndex = text.lastIndexOf("%");
+        return text.substring(0, percentageSymbolIndex).toInt()
+    }
+
+    private fun updateMenuListRecyclerViewCurrentDiscount(currentDiscount: Int) {
+        menuRecyclerViewAdapter.currentDiscount = currentDiscount
+        menuRecyclerViewAdapter.notifyDataSetChanged()
     }
 
 }

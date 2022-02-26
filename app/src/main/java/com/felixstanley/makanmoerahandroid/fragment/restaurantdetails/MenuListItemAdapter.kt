@@ -12,7 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MenuListItemAdapter : ListAdapter<Menu, RecyclerView.ViewHolder>(MenuDiffCallback()) {
+class MenuListItemAdapter(var currentDiscount: Int = 0) :
+    ListAdapter<Menu, RecyclerView.ViewHolder>(MenuDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
@@ -41,9 +42,17 @@ class MenuListItemAdapter : ListAdapter<Menu, RecyclerView.ViewHolder>(MenuDiffC
             }
         }
 
-        fun bind(menu: Menu) {
+        fun bind(menu: Menu, currentDiscount: Int) {
             binding.menu = menu
+
+            // Calculate Menu After Price by applying Current Discount to Menu Price
+            binding.menuAfterPrice.text =
+                (menu.price * getCurrentDiscountPercentage(currentDiscount)).toString()
             binding.executePendingBindings()
+        }
+
+        private fun getCurrentDiscountPercentage(currentDiscount: Int): Double {
+            return (100 - currentDiscount) / 100.0;
         }
     }
 
@@ -54,7 +63,7 @@ class MenuListItemAdapter : ListAdapter<Menu, RecyclerView.ViewHolder>(MenuDiffC
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is MenuListItemViewHolder -> {
-                holder.bind(getItem(position))
+                holder.bind(getItem(position), currentDiscount)
             }
         }
     }

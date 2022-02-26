@@ -26,11 +26,9 @@
             android:layout_marginEnd="10dp"
             android:text="@{String.valueOf(menu.price)}" />
 
-        <!--TODO: Implement After Price Logic -->
         <TextView
             android:id="@+id/menu_after_price"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{String.valueOf(menu.price)}" />
+            android:layout_height="wrap_content" />
     </TableRow>
 </layout>

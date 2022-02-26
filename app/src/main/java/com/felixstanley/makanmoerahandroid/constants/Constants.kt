@@ -37,6 +37,12 @@ object Constants {
         "20"
     )
 
+    // Restaurant Details Fragment Discount Selection Initial Dropdown Items
+    const val RESTAURANT_DETAILS_FRAGMENT_DISCOUNT_SELECTION_INITIAL_DROPDOWN_ITEM_NOT_AVAILABLE =
+        "N/A"
+    val RESTAURANT_DETAILS_FRAGMENT_DISCOUNT_SELECTION_INITIAL_DROPDOWN_ITEMS =
+        listOf(RESTAURANT_DETAILS_FRAGMENT_DISCOUNT_SELECTION_INITIAL_DROPDOWN_ITEM_NOT_AVAILABLE)
+
     // Shared Preferences Key
     const val SHARED_PREFERENCES_LOGIN_EMAIL_KEY = "loginEmail"
     const val SHARED_PREFERENCES_LOGIN_PASSWORD_KEY = "loginPassword"

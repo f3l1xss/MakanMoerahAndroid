@@ -73,6 +73,7 @@
     <string name="restaurant_details_fragment_opening_hour_table_closing_hour_header_text">Closing Hour</string>
     <string name="restaurant_details_fragment_discount_table_before_header_text">Before</string>
     <string name="restaurant_details_fragment_discount_table_after_header_text">After</string>
+    <string name="restaurant_details_fragment_discount_table_discount_selection_dropdown_hint">Discount Selection</string>
     <string name="restaurant_details_fragment_reviews_header_text">Reviews</string>
     <string name="restaurant_details_fragment_number_of_reviews_text">review(s)</string>
     <string name="restaurant_details_fragment_review_card_user_avatar_image_content_description">User Image</string>

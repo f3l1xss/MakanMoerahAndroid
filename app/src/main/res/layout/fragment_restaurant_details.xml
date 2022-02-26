@@ -228,15 +228,22 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp">
 
-                        <!--TODO: Change this to dropdown menu -->
-                        <TextView
+                        <!-- Discount Selection Exposed Dropdown -->
+                        <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/restaurant_details_card_discount_table_discount_selection"
-                            android:layout_width="match_parent"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
-                            android:text="Discount Selection"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                            android:hint="@string/restaurant_details_fragment_discount_table_discount_selection_dropdown_hint">
+
+                            <com.felixstanley.makanmoerahandroid.fragment.explore.ExposedDropdownMenu
+                                android:id="@+id/restaurant_details_card_discount_table_discount_selection_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <TextView
                             android:id="@+id/restaurant_details_card_discount_table_before_header"
