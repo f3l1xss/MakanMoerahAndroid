@@ -143,6 +143,31 @@
                     android:textStyle="italic" />
 
                 <!-- Holiday Hour Notice (Will be shown if selected date has holiday hour entry) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/restaurant_details_card_holiday_hour_notice_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/danger">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/restaurant_details_card_holiday_hour_notice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            app:holidayHourNotice="@{restaurant}" />
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- Opening Hours Table -->
                 <TableLayout

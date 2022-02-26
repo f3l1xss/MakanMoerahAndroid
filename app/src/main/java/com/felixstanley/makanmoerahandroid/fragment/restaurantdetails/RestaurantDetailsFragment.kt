@@ -91,6 +91,12 @@ class RestaurantDetailsFragment : AbstractFragment() {
                 numberOfReviews.text = "0"
             }
 
+            // Make Holiday Hour Notice Visible if there is Holiday Hour Entry
+            val holidayHourNoticeCard = binding.restaurantDetailsCardHolidayHourNoticeCard
+            if (it.restaurantHolidayHours != null && it.restaurantHolidayHours.isNotEmpty()) {
+                holidayHourNoticeCard.visibility = View.VISIBLE
+            }
+
             binding.executePendingBindings()
         }
     }
