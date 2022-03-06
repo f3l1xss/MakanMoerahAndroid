@@ -216,6 +216,12 @@
 
 
                 <!-- Location Map -->
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/restaurant_details_card_location_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
 
                 <!-- Discount (Menu) Table -->
                 <TableLayout

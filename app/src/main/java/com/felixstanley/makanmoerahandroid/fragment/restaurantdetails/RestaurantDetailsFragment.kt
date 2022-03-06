@@ -17,6 +17,11 @@ import com.felixstanley.makanmoerahandroid.entity.restaurant.RestaurantCapacity
 import com.felixstanley.makanmoerahandroid.fragment.AbstractFragment
 import com.felixstanley.makanmoerahandroid.fragment.explore.ExposedDropdownMenu
 import com.felixstanley.makanmoerahandroid.network.api.NetworkApi
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 class RestaurantDetailsFragment : AbstractFragment() {
 
@@ -31,6 +36,8 @@ class RestaurantDetailsFragment : AbstractFragment() {
     private lateinit var reviewRecyclerViewAdapter: ReviewListItemAdapter
 
     private lateinit var discountSelectionDropdownMenu: ExposedDropdownMenu
+
+    private lateinit var locationMap: MapView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +67,7 @@ class RestaurantDetailsFragment : AbstractFragment() {
         initializeMenuListRecyclerView()
         initializeReviewListRecyclerView()
         initializeDiscountSelectionDropdown()
+        initializeLocationMap(savedInstanceState)
         initializeRestaurant()
 
         return binding.root
@@ -111,6 +119,22 @@ class RestaurantDetailsFragment : AbstractFragment() {
             if (it.restaurantCapacities != null && it.restaurantCapacities.isNotEmpty()) {
                 // TODO: Determine Current Capacity Selection Through Selection Via Booking Card
                 updateDiscountSelectionDropdownListItems(it.restaurantCapacities[0])
+            }
+
+            // Add Marker of Current Restaurant Coordinate to LocationMap
+            locationMap.getMapAsync { googleMap ->
+                val currentRestaurantCoordinate = LatLng(it.coordinate.lat, it.coordinate.lon)
+                val markerOptions =
+                    MarkerOptions().position(currentRestaurantCoordinate)
+                        .title(it.name).snippet("${it.address} ${it.city}")
+                googleMap.addMarker(markerOptions)
+
+                // Zoom in to the added marker
+                val cameraPosition = CameraPosition.fromLatLngZoom(
+                    currentRestaurantCoordinate,
+                    Constants.RESTAURANT_DETAILS_FRAGMENT_LOCATION_MAP_ZOOM_LEVEL
+                )
+                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
             }
 
             binding.executePendingBindings()
@@ -209,5 +233,13 @@ class RestaurantDetailsFragment : AbstractFragment() {
         menuRecyclerViewAdapter.currentDiscount = currentDiscount
         menuRecyclerViewAdapter.notifyDataSetChanged()
     }
+
+    private fun initializeLocationMap(savedInstanceState: Bundle?) {
+        locationMap = binding.restaurantDetailsCardLocationMap
+        locationMap.onCreate(savedInstanceState)
+        // Needed for map to start showing
+        locationMap.onResume()
+    }
+
 
 }
