@@ -6,6 +6,7 @@ import com.felixstanley.makanmoerahandroid.entity.enums.RestaurantFilter
 import com.felixstanley.makanmoerahandroid.entity.enums.SortCriteria
 import com.felixstanley.makanmoerahandroid.entity.restaurant.Restaurant
 import com.felixstanley.makanmoerahandroid.entity.restaurant.RestaurantCriteriaWithValue
+import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Query
 import java.time.LocalDate
@@ -41,12 +42,14 @@ interface RestaurantService {
     ): List<Restaurant>
 
 
+    // Need to return ResponseBody to allow null Value
+    // https://github.com/square/retrofit/issues/1554
     @GET("$BASE_URL/getById")
     suspend fun getById(
         @Query("id") id: Int,
         @Query("date") date: LocalDate,
         @Query("numOfPeople") numOfPeople: Int
-    ): Restaurant
+    ): ResponseBody
 
     @GET("$BASE_URL/criteria")
     suspend fun getCriteria(

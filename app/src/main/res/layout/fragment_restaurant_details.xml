@@ -20,10 +20,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- This Linear Layout will be hidden if Restaurant is Approved (Viewable) -->
+        <LinearLayout
+            android:id="@+id/restaurant_details_card_invalid_restaurant_header_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/restaurant_details_card_invalid_restaurant_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/restaurant_details_fragment_invalid_restaurant_header_text"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Nested Scroll View will be shown if Restaurant is Approved (Viewable) -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/restaurant_details_card_nested_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"

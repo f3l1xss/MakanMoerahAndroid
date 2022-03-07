@@ -77,5 +77,6 @@
     <string name="restaurant_details_fragment_reviews_header_text">Reviews</string>
     <string name="restaurant_details_fragment_number_of_reviews_text">review(s)</string>
     <string name="restaurant_details_fragment_review_card_user_avatar_image_content_description">User Image</string>
+    <string name="restaurant_details_fragment_invalid_restaurant_header_text">Invalid Restaurant</string>
 
 </resources>

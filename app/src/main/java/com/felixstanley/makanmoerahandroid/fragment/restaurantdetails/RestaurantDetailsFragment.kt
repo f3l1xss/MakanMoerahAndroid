@@ -87,6 +87,10 @@ class RestaurantDetailsFragment : AbstractFragment() {
 
     private fun initializeRestaurant() {
         viewModel.restaurant.observe(viewLifecycleOwner) { it ->
+            // Hide Invalid Restaurant Header & Show Main Content Nested Scroll View
+            // As Restaurant is Approved (Viewable)
+            binding.restaurantDetailsCardInvalidRestaurantHeaderLinearLayout.visibility = View.GONE
+            binding.restaurantDetailsCardNestedScrollView.visibility = View.VISIBLE
             binding.restaurant = it
 
             // Populate Data for Facility, Payment Mode, OpeningHour, Menu, Review Recycler View
