@@ -1,5 +1,6 @@
 package com.felixstanley.makanmoerahandroid.fragment.restaurantdetails
 
+import android.graphics.Paint
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.felixstanley.makanmoerahandroid.entity.restaurant.Restaurant
@@ -16,4 +17,11 @@ fun bindHolidayHourNotice(textView: TextView, restaurant: Restaurant?) {
                         "Please verify with Restaurant for timing confirmation before making a booking."
         }
     }
+}
+
+@BindingAdapter("strikeThroughText")
+fun bindStrikeThroughText(textView: TextView, text: String) {
+    textView.text = text
+    // Trigger Strike Through Flag by performing OR with existing Paint Flags
+    textView.paintFlags = textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 }

@@ -41,7 +41,7 @@ class ReviewListItemAdapter :
 
                 val sectionWidth = (parent.width * 0.33).toInt()
                 val sectionLayoutParams = LinearLayout.LayoutParams(
-                    sectionWidth, ViewGroup.LayoutParams.WRAP_CONTENT
+                    sectionWidth, ViewGroup.LayoutParams.MATCH_PARENT
                 )
 
                 // Modify Each Section Width to match 1/3 of Parent's Width
