@@ -87,6 +87,35 @@
             android:textSize="17sp"
             app:backgroundTint="@color/lightBlue" />
 
+        <!-- OAuth2 Login Button -->
+
+        <!-- Facebook Login Button -->
+        <Button
+            android:id="@+id/facebook_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:onClick="@{() -> loginViewModel.onFacebookOAuth2LoginButtonClicked()}"
+            android:text="@string/login_fragment_facebook_login_button_text"
+            android:textColor="@color/primaryColor"
+            android:textSize="17sp"
+            app:backgroundTint="@color/lightBlue"
+            app:iconSize="24dp" />
+
+        <!-- Google Login Button -->
+        <Button
+            android:id="@+id/google_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:onClick="@{() -> loginViewModel.onGoogleOAuth2LoginButtonClicked()}"
+            android:text="@string/login_fragment_google_login_button_text"
+            android:textColor="@color/primaryColor"
+            android:textSize="17sp"
+            app:backgroundTint="@color/lightBlue" />
+
     </LinearLayout>
 
 </layout>

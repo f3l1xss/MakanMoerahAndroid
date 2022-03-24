@@ -1,12 +1,17 @@
 package com.felixstanley.makanmoerahandroid
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.felixstanley.makanmoerahandroid.constants.Constants
+import com.felixstanley.makanmoerahandroid.network.cookie.CookieJarImpl
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import okhttp3.Cookie
+import okhttp3.HttpUrl
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -18,6 +23,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Handle Intent Data and parse cookie if request is coming from OAuth2 Login Redirection
+        handleCookieIntentData(intent)
+
         instance = this
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -49,6 +57,32 @@ class MainActivity : AppCompatActivity() {
 
         // Hide Title Text at Action Bar
         supportActionBar!!.setDisplayShowTitleEnabled(false);
+    }
+
+    private fun handleCookieIntentData(intent: Intent) {
+        // Redirection from OAuth2 Login will result in ACTION_VIEW
+        if (intent.action == Intent.ACTION_VIEW) {
+            intent.data?.let { intentData ->
+                val cookies =
+                    intentData.getQueryParameter(Constants.OAUTH2_REDIRECTION_URL_COOKIE_VALUE_QUERY_PARAMETER_NAME)
+                val cookieValueList =
+                    cookies?.split(Constants.OAUTH2_REDIRECTION_URL_COOKIE_VALUE_DELIMITER)
+                cookieValueList?.let {
+                    // For Each Cookie Value Found , insert it into DB
+                    for (cookieValue in it.listIterator()) {
+                        val cookie = Cookie.parse(
+                            HttpUrl.parse(intentData.toString()),
+                            cookieValue
+                        )
+                        cookie?.let {
+                            CookieJarImpl.insertNewCookie(it)
+                        }
+                    }
+                    // Finally, Refresh our Cookies Cache with latest value from DB
+                    CookieJarImpl.retrieveLatestCookiesFromDb()
+                }
+            }
+        }
     }
 
 }

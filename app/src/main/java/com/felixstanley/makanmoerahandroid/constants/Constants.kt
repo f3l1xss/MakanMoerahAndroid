@@ -53,4 +53,14 @@ object Constants {
     // Room Database
     const val COOKIE_DATABASE_NAME = "cookie_database"
 
+    // OAuth2 URL
+    private const val OAUTH2_BASE_URL = "https://makanmoerah.com/oauth2/authorization/"
+    const val FACEBOOK_OAUTH2_AUTHORIZATION_URL = OAUTH2_BASE_URL + "facebook"
+    const val GOOGLE_OAUTH2_AUTHORIZATION_URL = OAUTH2_BASE_URL + "google"
+
+    // OAuth2 Redirection Cookie
+    const val OAUTH2_REDIRECTION_URL_COOKIE_VALUE_QUERY_PARAMETER_NAME = "cookies"
+
+    // Delimiter to separate Cookie Value at Query Parameters
+    const val OAUTH2_REDIRECTION_URL_COOKIE_VALUE_DELIMITER = "~"
 }

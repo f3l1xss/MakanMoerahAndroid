@@ -23,16 +23,11 @@ object CookieJarImpl : CookieJar {
     }
 
     override fun saveFromResponse(url: HttpUrl, newCookies: MutableList<Cookie>) {
-        runBlocking {
-            // Update and Save All Cookies
-            for (newCookie in newCookies.listIterator()) {
-                if (cookies.any { cookie -> cookie.name().equals(newCookie.name()) }) {
-                    cookieDatabaseDao.deleteByName(newCookie.name())
-                }
-                cookieDatabaseDao.insert(newCookie.asDatabaseModel())
-            }
-            retrieveLatestCookiesFromDb()
+        // Update and Save All Cookies
+        for (newCookie in newCookies.listIterator()) {
+            insertNewCookie(newCookie)
         }
+        retrieveLatestCookiesFromDb()
     }
 
     override fun loadForRequest(url: HttpUrl): List<Cookie> {
@@ -40,8 +35,17 @@ object CookieJarImpl : CookieJar {
         return cookies
     }
 
+    fun insertNewCookie(cookie: Cookie) {
+        runBlocking {
+            if (cookies.any { cookie -> cookie.name().equals(cookie.name()) }) {
+                cookieDatabaseDao.deleteByName(cookie.name())
+            }
+            cookieDatabaseDao.insert(cookie.asDatabaseModel())
+        }
+    }
+
     // Retrieve Latest Cookies From DB Synchronously
-    private fun retrieveLatestCookiesFromDb() {
+    fun retrieveLatestCookiesFromDb() {
         cookies = cookieDatabaseDao.getAllCookiesSynchronous().asDomainModel()
     }
 

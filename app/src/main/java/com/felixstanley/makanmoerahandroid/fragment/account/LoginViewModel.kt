@@ -35,6 +35,19 @@ class LoginViewModel(
     val loginFailure: LiveData<LoginFailure>
         get() = _loginFailure
 
+    // OAuth2 Login Button Clicked Flag (will emit the Authorization URL)
+    private val _oAuth2LoginButtonClicked = MutableLiveData<String>()
+    val oAuth2LoginButtonClicked: LiveData<String>
+        get() = _oAuth2LoginButtonClicked
+
+    fun onGoogleOAuth2LoginButtonClicked() {
+        _oAuth2LoginButtonClicked.value = Constants.GOOGLE_OAUTH2_AUTHORIZATION_URL
+    }
+
+    fun onFacebookOAuth2LoginButtonClicked() {
+        _oAuth2LoginButtonClicked.value = Constants.FACEBOOK_OAUTH2_AUTHORIZATION_URL
+    }
+
     fun onLoginButtonClicked() {
         _loginButtonClicked.value = true
     }
@@ -49,6 +62,10 @@ class LoginViewModel(
 
     fun resetLoginFailureFlag() {
         _loginFailure.value = null
+    }
+
+    fun resetOAuth2LoginButtonClickedFlag() {
+        _oAuth2LoginButtonClicked.value = null
     }
 
     fun login(email: String, password: String) {

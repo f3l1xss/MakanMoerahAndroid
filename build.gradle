@@ -14,6 +14,7 @@ buildscript {
         version_flexbox = "3.0.0"
         version_room = "2.3.0"
         version_maps = "18.0.2"
+        version_androidx_browser = "1.4.0"
     }
     repositories {
         google()

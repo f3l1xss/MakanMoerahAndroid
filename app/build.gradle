@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.felixstanley.makanmoerahandroid"
         minSdk 22
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -89,4 +89,8 @@ dependencies {
 
     // Google Maps
     implementation "com.google.android.gms:play-services-maps:$version_maps"
+
+    // Android X Browser (For Custom Tabs Support)
+    // https://developer.chrome.com/docs/android/custom-tabs/integration-guide/
+    implementation "androidx.browser:browser:$version_androidx_browser"
 }

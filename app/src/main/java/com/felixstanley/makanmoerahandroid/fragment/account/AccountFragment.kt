@@ -86,6 +86,7 @@ class AccountFragment : AbstractFragment() {
             initializeLoginButtonBehavior()
             initializeLoginCompletedBehavior()
             initializeLoginFailureBehavior()
+            initializeOAuth2LoginBehavior()
 
             return fragmentLoginBinding.root
         }
@@ -251,5 +252,16 @@ class AccountFragment : AbstractFragment() {
             loginPasswordInputLayout.error =
                 getString(R.string.login_fragment_empty_password_error_message)
         }
+    }
+
+    private fun initializeOAuth2LoginBehavior() {
+        loginViewModel.oAuth2LoginButtonClicked.observe(viewLifecycleOwner, { it ->
+            if (it != null) {
+                // Reset OAuth2LoginButtonClicked Flag before calling Custom Tabs Intent
+                // to Open Authorization URL
+                loginViewModel.resetOAuth2LoginButtonClickedFlag()
+                callCustomTabsIntent(it)
+            }
+        })
     }
 }

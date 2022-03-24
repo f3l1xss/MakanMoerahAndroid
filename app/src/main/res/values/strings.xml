@@ -43,6 +43,8 @@
     <string name="login_fragment_password_input_text_hint">Password</string>
     <string name="login_fragment_empty_password_error_message">Required</string>
     <string name="login_fragment_login_button_text">Login</string>
+    <string name="login_fragment_facebook_login_button_text">Login with Facebook</string>
+    <string name="login_fragment_google_login_button_text">Login with Google</string>
     <string name="login_fragment_login_failure_invalid_credentials_error_message">Invalid Credentials</string>
     <string name="login_fragment_login_failure_failed_recaptcha_error_message">Invalid Recaptcha, Please try login again</string>
     <string name="login_fragment_login_failure_empty_recaptcha_response_error_message">Empty Recaptcha Response, Please try login again</string>
